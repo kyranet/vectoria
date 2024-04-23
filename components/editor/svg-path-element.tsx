@@ -348,17 +348,22 @@ function parse_t(coordinates: Coordinates, parts: IterableIterator<RegExpExecArr
  * (`A`) commands.
  */
 function parse_A(coordinates: Coordinates, parts: IterableIterator<RegExpExecArray>) {
-	// TODO: Fix case for angle being !== 0
-	const from = { ...coordinates };
-	const rx = getNext(parts);
-	const ry = getNext(parts);
-	const angle = getNext(parts);
+	const x1 = coordinates.x;
+	const y1 = coordinates.y;
+	let rx = getNext(parts);
+	let ry = getNext(parts);
+	const angle = getNext(parts) / (Math.PI * 2);
 	const largeArcFlag = getNext(parts);
 	const sweepFlag = getNext(parts);
-	coordinates.x = getNext(parts);
-	coordinates.y = getNext(parts);
-	console.log({ rx, ry, angle, largeArcFlag, sweepFlag });
-	return renderLine(from, coordinates);
+	const x2 = (coordinates.x = getNext(parts));
+	const y2 = (coordinates.y = getNext(parts));
+
+	const v = getEllipseCenter(x1, y1, x2, y2, rx, ry, angle, largeArcFlag, sweepFlag);
+
+	return renderArrow({ x: x1, y: y1 }, { x: v.x, y: v.y }).concat(
+		renderArrow({ x: x2, y: y2 }, { x: v.x, y: v.y }),
+		renderEllipse(v.x, v.y, rx, ry, angle)
+	);
 }
 
 /**
@@ -381,17 +386,21 @@ function parse_A(coordinates: Coordinates, parts: IterableIterator<RegExpExecArr
  * relative arc curve (`a`) commands.
  */
 function parse_a(coordinates: Coordinates, parts: IterableIterator<RegExpExecArray>) {
-	// TODO: Implement this function after `parse_A` is fixed
-	const from = { ...coordinates };
+	const x1 = coordinates.x;
+	const y1 = coordinates.y;
 	const rx = getNext(parts);
 	const ry = getNext(parts);
 	const angle = getNext(parts);
 	const largeArcFlag = getNext(parts);
 	const sweepFlag = getNext(parts);
-	coordinates.x += getNext(parts);
-	coordinates.y += getNext(parts);
-	console.log({ rx, ry, angle, largeArcFlag, sweepFlag });
-	return renderLine(from, coordinates);
+	const x2 = (coordinates.x += getNext(parts));
+	const y2 = (coordinates.y += getNext(parts));
+	const v = getEllipseCenter(x1, y1, x2, y2, rx, ry, angle, largeArcFlag, sweepFlag);
+
+	return renderArrow({ x: x1, y: y1 }, { x: v.x, y: v.y }).concat(
+		renderArrow({ x: x2, y: y2 }, { x: v.x, y: v.y }),
+		renderEllipse(v.x, v.y, rx, ry, angle)
+	);
 }
 
 /**
@@ -413,25 +422,124 @@ function parse_z() {
 }
 
 function renderDot(coordinates: Coordinates) {
-	return <circle cx={coordinates.x} cy={coordinates.y} r={1} fill="red" />;
+	return <circle cx={coordinates.x} cy={coordinates.y} r={1} fill="none" stroke="currentColor" stroke-width={0.5} />;
 }
 
 function renderLine(from: Coordinates, to: Coordinates) {
-	return [renderDot(from), <line x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke="black" />, renderDot(to)];
+	return [
+		renderDot(from),
+		<line
+			x1={from.x}
+			y1={from.y}
+			x2={to.x}
+			y2={to.y}
+			stroke="currentColor"
+			stroke-linecap="round"
+			stroke-opacity={0.4}
+			stroke-dasharray="1 3"
+			stroke-width={0.5}
+		/>,
+		renderDot(to)
+	];
 }
 
 function renderGuide(from: Coordinates, to: Coordinates) {
-	return [renderDot(from), <line x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke="black" stroke-dasharray={2} />, renderDot(to)];
+	return [
+		renderDot(from),
+		<line
+			x1={from.x}
+			y1={from.y}
+			x2={to.x}
+			y2={to.y}
+			stroke="currentColor"
+			stroke-linecap="round"
+			stroke-opacity={0.4}
+			stroke-dasharray="1 3"
+			stroke-width={0.5}
+		/>,
+		renderDot(to)
+	];
 }
 
 function renderArrow(from: Coordinates, to: Coordinates) {
-	return [renderDot(from), <line x1={from.x} y1={from.y} x2={to.x} y2={to.y} stroke="black" />, <circle cx={to.x} cy={to.y} r={2} fill="black" />];
+	return [
+		renderDot(from),
+		<line
+			x1={from.x}
+			y1={from.y}
+			x2={to.x}
+			y2={to.y}
+			stroke="currentColor"
+			stroke-linecap="round"
+			stroke-opacity={0.4}
+			stroke-dasharray="1 3"
+			stroke-width={0.5}
+		/>,
+		<circle cx={to.x} cy={to.y} r={1} fill="none" stroke="currentColor" stroke-opacity={0.4} stroke-width={0.5} />
+	];
+}
+
+function renderEllipse(cx: number, cy: number, rx: number, ry: number, angle: number) {
+	return (
+		<ellipse
+			cx={cx}
+			cy={cy}
+			rx={rx}
+			ry={ry}
+			transform={`rotate(${angle} ${cx} ${cy})`}
+			fill="none"
+			stroke="currentColor"
+			stroke-linecap="round"
+			stroke-opacity={0.4}
+			stroke-dasharray="1 3"
+			stroke-width={0.5}
+		/>
+	);
 }
 
 function getNext(parts: IterableIterator<RegExpExecArray>) {
 	const next = parts.next();
 	if (next.done) throw new Error('Unexpected end of path');
 	return Number(next.value[0]);
+}
+
+function getEllipseCenter(
+	x1: number,
+	y1: number,
+	x2: number,
+	y2: number,
+	rx: number,
+	ry: number,
+	angle: number,
+	largeArcFlag: number,
+	sweepFlag: number
+) {
+	// TODO: Fix case for angle being !== 0
+	const phi = ((angle % 360) * Math.PI) / 180;
+	const m = new DOMMatrix([Math.cos(phi), -Math.sin(phi), Math.sin(phi), Math.cos(phi), 0, 0]);
+	let v = new DOMPoint((x1 - x2) / 2, (y1 - y2) / 2).matrixTransform(m);
+	const x1p = v.x;
+	const y1p = v.y;
+	rx = Math.abs(rx);
+	ry = Math.abs(ry);
+	const lambda = (x1p * x1p) / (rx * rx) + (y1p * y1p) / (ry * ry);
+	if (lambda > 1) {
+		rx = Math.sqrt(lambda) * rx;
+		ry = Math.sqrt(lambda) * ry;
+	}
+	const sign = largeArcFlag === sweepFlag ? -1 : 1;
+	const div = (rx * rx * ry * ry - rx * rx * y1p * y1p - ry * ry * x1p * x1p) / (rx * rx * y1p * y1p + ry * ry * x1p * x1p);
+
+	const co = sign * Math.sqrt(Math.abs(div));
+
+	// inverse matrix b and c
+	m.b *= -1;
+	m.c *= -1;
+	v = new DOMPoint(((rx * y1p) / ry) * co, ((-ry * x1p) / rx) * co).matrixTransform(m);
+	v.x += (x1 + x2) / 2;
+	v.y += (y1 + y2) / 2;
+
+	return v;
 }
 
 interface Coordinates {

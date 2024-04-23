@@ -11,14 +11,18 @@
 			></textarea>
 		</div>
 		<div v-show="svgNode || errorNode" class="h-fit w-fit rounded-xl bg-base-200 p-4 drop-shadow-xl">
+			<div class="mb-4">
+				<label for="input-scale-slider" class="label">Scale:</label>
+				<input id="input-scale-slider" v-model="scale" type="range" min="0.1" max="50" step="0.1" class="range w-96" />
+			</div>
 			<div
 				ref="parent"
 				class="relative border-2"
 				:class="{ 'border-success': svgNode, 'border-error': errorNode }"
-				:style="{ width: svgSize.width, height: svgSize.height }"
+				:style="{ width: scaledSize.width, height: scaledSize.height }"
 			>
 				<div></div>
-				<editor-svg />
+				<editor-svg v-if="svgNode" :el="svgNode" />
 			</div>
 			<ul v-if="svgNode" class="mt-4 grid grid-cols-2 gap-2">
 				<li>
@@ -59,7 +63,13 @@ const svgSize = computed(() => {
 	return { x, y, width: `${width}px`, height: `${height}px` };
 });
 
-provide(ProviderSVGKey, svgNode);
+const scale = ref(1);
+const scaledSize = computed(() => {
+	if (!svgNode.value) return { width: '0px', height: '0px' };
+
+	const { width, height } = svgNode.value.viewBox.baseVal;
+	return { width: `${width * scale.value}px`, height: `${height * scale.value}px` };
+});
 
 if (process.client) {
 	const parser = new DOMParser();
@@ -68,20 +78,6 @@ if (process.client) {
 		const [child] = result.children;
 
 		if (child.tagName === 'svg') {
-			// const editor = h(
-			// 	'svg',
-			// 	{
-			// 		style: {
-			// 			position: 'absolute',
-			// 			top: '0',
-			// 			left: '0'
-			// 		},
-			// 		width: node.width.baseVal.valueAsString,
-			// 		height: node.height.baseVal.valueAsString,
-			// 		viewBox: `${node.viewBox.baseVal.x} ${node.viewBox.baseVal.y} ${node.width.baseVal.value} ${node.height.baseVal.value}`
-			// 	}
-			// );
-
 			svgNode.value = child as SVGSVGElement;
 			errorNode.value = null;
 		} else {
