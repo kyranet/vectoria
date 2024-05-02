@@ -58,9 +58,19 @@
 			</ul>
 		</div>
 	</div>
+
+	<div v-show="dropping" class="absolute left-0 top-0 flex h-screen w-screen items-center justify-center bg-base-300/60 backdrop-blur-sm">
+		<div class="rounded-box bg-primary p-4 text-primary-content">
+			<div class="rounded-box p-12 outline outline-8 outline-white/20">
+				<span class="text-4xl font-bold">Drop to load</span>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script setup lang="ts">
+import { VectorRoot } from '~/utils/svg/VectorRoot';
+
 const input = ref('');
 const parent = ref<HTMLDivElement | null>(null!);
 const svgNode = ref<SVGSVGElement | null>(null);
@@ -82,6 +92,7 @@ const scaledSize = computed(() => {
 	return { width: `${width * scale.value}px`, height: `${height * scale.value}px` };
 });
 
+const dropping = ref(false);
 if (process.client) {
 	const parser = new DOMParser();
 	watch(input, (value) => {
@@ -91,6 +102,7 @@ if (process.client) {
 		if (child.tagName === 'svg') {
 			svgNode.value = child as SVGSVGElement;
 			errorNode.value = null;
+			console.log(new VectorRoot(svgNode.value))
 		} else {
 			svgNode.value = null;
 			errorNode.value = child as HTMLElement;
@@ -98,6 +110,18 @@ if (process.client) {
 
 		parent.value!.firstChild!.replaceWith(child);
 	});
+
+	const { isOverDropZone } = useDropZone(document.body, { onDrop });
+	syncRef(dropping, isOverDropZone);
+
+	async function onDrop(files: File[] | null) {
+		if (!files?.length) return;
+
+		const [file] = files;
+		if (file.type !== 'image/svg+xml') return;
+
+		input.value = (await file.text()).trim();
+	}
 }
 </script>
 
