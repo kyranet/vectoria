@@ -1,5 +1,5 @@
 import { peekable } from '@sapphire/iterator-utilities';
-import type { IVectorElement } from './base/IVectorElement';
+import { BaseGeometryVectorElement } from './base/BaseGeometryVectorElement';
 import { ArcCurve } from './path/ArcCurve';
 import { ClosePath } from './path/ClosePath';
 import { CubicBézierCurve } from './path/CubicBézierCurve';
@@ -13,42 +13,25 @@ import { VerticalLineTo } from './path/VerticalLineTo';
 import { trim } from './path/parser/trim';
 import type { Coordinate } from './shared/Coordinate';
 
-export class VectorPath implements IVectorElement {
-	public readonly element: SVGPathElement;
-	public pathLength: number | undefined;
-	public entries!: VectorPath.PathEntry[];
-	public start!: Coordinate;
-	public end!: Coordinate;
+export class VectorPath extends BaseGeometryVectorElement<SVGPathElement> {
+	public entries: VectorPath.PathEntry[];
+	public start: Coordinate;
+	public end: Coordinate;
 
 	public constructor(element: SVGPathElement) {
-		this.element = element;
-
-		this.#parsePathData(element.getAttribute('d'));
-		this.pathLength = element.pathLength.baseVal;
-
-		useMutationObserver(element, (mutations) => this.#onUpdate(mutations), {
-			attributes: true,
-			childList: false,
-			subtree: false,
-			attributeFilter: ['d', 'pathLength']
-		});
-	}
-
-	#onUpdate(mutations: MutationRecord[]) {
-		for (const mutation of mutations) {
-			if (mutation.type === 'attributes') {
-				if (mutation.attributeName === 'd') {
-					this.#parsePathData(this.element.getAttribute('d'));
-				}
-			}
-		}
-	}
-
-	#parsePathData(input: string | null | undefined) {
+		super(element, 'Path');
 		this.entries = [];
 		this.start = { x: 0, y: 0 };
 		this.end = { x: 0, y: 0 };
 
+		this.#parsePathData(element.getAttribute('d'));
+	}
+
+	public toPath(): VectorPath {
+		return this;
+	}
+
+	#parsePathData(input: string | null | undefined) {
 		if (!input) return;
 
 		const reader = peekable(input);

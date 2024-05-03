@@ -4,10 +4,15 @@
 
 @layer components {
 	.icon {
+		@apply inline-block;
 		vertical-align: text-bottom !important;
 	}
 
 	.prose {
 		@apply max-w-none;
+	}
+
+	.text-base-content-readonly {
+		color: oklch(from oklch(var(--bc)) calc(l * 0.8) c h);
 	}
 }

@@ -1,15 +1,8 @@
 <template>
-	<div class="flex h-screen w-screen flex-row gap-4">
-		<div class="rounded-r-xl bg-base-200 p-4 drop-shadow-xl">
-			<textarea
-				v-model="input"
-				class="editor-textarea"
-				:class="{ 'textarea-success': svgNode, 'textarea-error': errorNode }"
-				autofocus="true"
-				spellcheck="false"
-				placeholder="SVG code"
-			></textarea>
-		</div>
+	<div class="flex h-screen w-screen flex-row">
+		<editor-panel-side :vector-root="editorNode" :draggable-panel-x="draggablePanelX" :success="svgNode ? true : errorNode ? false : null" />
+		<div ref="draggablePanel" class="cursor-ew-resize border-2 border-base-300 hover:border-primary"></div>
+
 		<div v-show="svgNode || errorNode" class="flex flex-grow flex-col justify-between overflow-hidden rounded-xl bg-base-200 drop-shadow-xl">
 			<div class="m-4 flex-grow overflow-auto">
 				<div
@@ -19,7 +12,7 @@
 					:style="{ width: scaledSize.width, height: scaledSize.height }"
 				>
 					<div></div>
-					<editor-svg v-if="svgNode" :el="svgNode" />
+					<!-- <editor-svg v-if="svgNode" :el="svgNode" /> -->
 				</div>
 			</div>
 			<ul v-if="svgNode" class="mt-4 flex flex-none flex-row justify-end gap-12 rounded-b-xl bg-base-300 p-4">
@@ -72,9 +65,15 @@
 import { VectorRoot } from '~/utils/svg/VectorRoot';
 
 const input = ref('');
+provide(InjectedCodeInput, input);
+
 const parent = ref<HTMLDivElement | null>(null!);
 const svgNode = ref<SVGSVGElement | null>(null);
 const errorNode = ref<HTMLElement | null>(null);
+const editorNode = ref<VectorRoot | null>(null);
+
+const draggablePanel = ref<HTMLDivElement>(null!);
+const { x: draggablePanelX } = useDraggable(draggablePanel, { axis: 'x', initialValue: { x: 300, y: 0 } });
 
 const svgSize = computed(() => {
 	if (!svgNode.value) return { x: 0, y: 0, width: '0px', height: '0px' };
@@ -102,10 +101,11 @@ if (process.client) {
 		if (child.tagName === 'svg') {
 			svgNode.value = child as SVGSVGElement;
 			errorNode.value = null;
-			console.log(new VectorRoot(svgNode.value))
+			editorNode.value = new VectorRoot(svgNode.value);
 		} else {
 			svgNode.value = null;
 			errorNode.value = child as HTMLElement;
+			editorNode.value = null;
 		}
 
 		parent.value!.firstChild!.replaceWith(child);
@@ -124,11 +124,3 @@ if (process.client) {
 	}
 }
 </script>
-
-<style scoped>
-.editor-textarea {
-	@apply textarea resize-x font-mono;
-	max-width: calc(100vw - 50rem);
-	height: calc(100vh - 2rem);
-}
-</style>

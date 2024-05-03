@@ -6,7 +6,7 @@ export abstract class BasePath<Type extends string> {
 	public readonly parent: VectorPath;
 	public readonly index: number;
 	public readonly start: Coordinate;
-	public readonly abstract end: Coordinate;
+	public abstract readonly end: Coordinate;
 
 	protected constructor(type: Type, parent: VectorPath, start: Coordinate) {
 		this.type = type;

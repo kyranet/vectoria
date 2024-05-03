@@ -51,7 +51,7 @@ export class LineTo extends BasePath<'L' | 'l'> {
 		return {
 			x: readNumber(stream),
 			y: readNumber(stream)
-		}
+		};
 	}
 }
 
