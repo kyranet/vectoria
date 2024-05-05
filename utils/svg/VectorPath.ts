@@ -13,13 +13,13 @@ import { VerticalLineTo } from './path/VerticalLineTo';
 import { trim } from './path/parser/trim';
 import type { Coordinate } from './shared/Coordinate';
 
-export class VectorPath extends BaseGeometryVectorElement<SVGPathElement> {
+export class VectorPath extends BaseGeometryVectorElement<SVGPathElement, 'path'> {
 	public entries: VectorPath.PathEntry[];
 	public start: Coordinate;
 	public end: Coordinate;
 
 	public constructor(element: SVGPathElement) {
-		super(element, 'Path');
+		super({ element, title: 'Path' });
 		this.entries = [];
 		this.start = { x: 0, y: 0 };
 		this.end = { x: 0, y: 0 };

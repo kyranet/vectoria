@@ -1,5 +1,6 @@
 <template>
 	<div class="flex h-screen w-screen flex-row">
+		<!-- @vue-expect-error Vue unwraps the value in a non-functional way -->
 		<editor-panel-side :vector-root="editorNode" :draggable-panel-x="draggablePanelX" :success="svgNode ? true : errorNode ? false : null" />
 		<div ref="draggablePanel" class="cursor-ew-resize border-2 border-base-300 hover:border-primary"></div>
 

@@ -1,7 +1,7 @@
 import { BaseGraphicsVectorElement } from './base/BaseGraphicsVectorElement';
 import type { MIMEType, TargetType } from './types/dom';
 
-export class VectorA extends BaseGraphicsVectorElement<SVGAElement> {
+export class VectorA extends BaseGraphicsVectorElement<SVGAElement, 'a'> {
 	public download: string | undefined;
 	public href: string | undefined;
 	public referredPolicy: ReferrerPolicy | undefined;
@@ -10,7 +10,7 @@ export class VectorA extends BaseGraphicsVectorElement<SVGAElement> {
 	public type: MIMEType | undefined;
 
 	public constructor(element: SVGAElement) {
-		super(element, 'Anchor');
+		super({ element, title: 'Anchor' });
 		this.download = element.getAttribute('download') ?? undefined;
 		this.href = element.href.baseVal;
 		this.referredPolicy = (element.getAttribute('referrerpolicy') ?? undefined) as ReferrerPolicy | undefined;

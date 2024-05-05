@@ -1,5 +1,5 @@
 <template>
-	<div class="editor-panel" :style="{ width: `${draggablePanelX}px` }">
+	<div class="editor-panel relative" :style="{ width: `${draggablePanelX}px` }">
 		<div role="tablist" class="tabs-boxed tabs">
 			<a role="tab" class="tab" :class="{ 'tab-active': tabEditor }" @click="tabEditor = true">Editor</a>
 			<a role="tab" class="tab" :class="{ 'tab-active': !tabEditor }" @click="tabEditor = false">Code</a>

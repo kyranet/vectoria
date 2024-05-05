@@ -1,6 +1,6 @@
 import { BaseGraphicsVectorElement } from './base/BaseGraphicsVectorElement';
 
-export class VectorUse extends BaseGraphicsVectorElement<SVGUseElement> {
+export class VectorUse extends BaseGraphicsVectorElement<SVGUseElement, 'use'> {
 	public x: SVGLength;
 	public y: SVGLength;
 	public width: SVGLength;
@@ -8,7 +8,7 @@ export class VectorUse extends BaseGraphicsVectorElement<SVGUseElement> {
 	public href: string;
 
 	public constructor(element: SVGUseElement) {
-		super(element, 'Use');
+		super({ element, title: 'Use' });
 		this.x = element.x.baseVal;
 		this.y = element.y.baseVal;
 		this.width = element.width.baseVal;

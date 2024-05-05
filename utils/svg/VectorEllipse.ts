@@ -1,14 +1,14 @@
 import { VectorPath } from './VectorPath';
 import { BaseGeometryVectorElement } from './base/BaseGeometryVectorElement';
 
-export class VectorEllipse extends BaseGeometryVectorElement<SVGEllipseElement> {
+export class VectorEllipse extends BaseGeometryVectorElement<SVGEllipseElement, 'ellipse'> {
 	public cx: SVGLength;
 	public cy: SVGLength;
 	public rx: SVGLength;
 	public ry: SVGLength;
 
 	public constructor(element: SVGEllipseElement) {
-		super(element, 'Ellipse');
+		super({ element, title: 'Ellipse' });
 		this.cx = element.cx.baseVal;
 		this.cy = element.cy.baseVal;
 		this.rx = element.rx.baseVal;
@@ -16,7 +16,7 @@ export class VectorEllipse extends BaseGeometryVectorElement<SVGEllipseElement> 
 	}
 
 	public toPath(): VectorPath {
-		const element = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+		const element = this.createPathElement();
 		const commands = [
 			`M ${this.cx.value - this.rx.value},${this.cy.value}`,
 			`a ${this.rx.value},${this.ry.value} 0 1,0 ${this.rx.value * 2},0`,
