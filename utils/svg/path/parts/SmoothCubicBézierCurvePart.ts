@@ -6,19 +6,19 @@ export class SmoothCubicBézierCurvePart extends BasePathPart<SmoothCubicBézier
 	/**
 	 * The `x`-coordinate of the end control point.
 	 */
-	public readonly x2: number;
+	public x2: number;
 	/**
 	 * The `y`-coordinate of the end control point.
 	 */
-	public readonly y2: number;
+	public y2: number;
 	/**
 	 * The `x`-coordinate of the end point.
 	 */
-	public readonly x: number;
+	public x: number;
 	/**
 	 * The `y`-coordinate of the end point.
 	 */
-	public readonly y: number;
+	public y: number;
 
 	public constructor(parent: SmoothCubicBézierCurve, start: Coordinate, data: SmoothCubicBézierCurvePart.Data) {
 		super(parent, start);

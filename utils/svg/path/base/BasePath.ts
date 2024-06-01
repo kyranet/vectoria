@@ -3,15 +3,15 @@ import type { Coordinate } from '../../shared/Coordinate';
 
 export abstract class BasePath<Type extends string> {
 	public readonly type: Type;
-	public readonly parent: VectorPath;
+	public readonly siblings: VectorPath.PathEntry[];
 	public readonly index: number;
 	public readonly start: Coordinate;
 	public abstract readonly end: Coordinate;
 
-	protected constructor(type: Type, parent: VectorPath, start: Coordinate) {
+	protected constructor(type: Type, siblings: VectorPath.PathEntry[], start: Coordinate) {
 		this.type = type;
-		this.parent = parent;
-		this.index = parent.entries.length;
+		this.siblings = siblings;
+		this.index = siblings.length;
 		this.start = start;
 	}
 
@@ -20,15 +20,15 @@ export abstract class BasePath<Type extends string> {
 	 */
 	public get previous(): VectorPath.PathEntry | null {
 		if (this.index === 0) return null;
-		return this.parent.entries[this.index - 1];
+		return this.siblings[this.index - 1];
 	}
 
 	/**
 	 * Returns the next path entry.
 	 */
 	public get next(): VectorPath.PathEntry | null {
-		if (this.index === this.parent.entries.length - 1) return null;
-		return this.parent.entries[this.index + 1];
+		if (this.index === this.siblings.length - 1) return null;
+		return this.siblings[this.index + 1];
 	}
 
 	/**

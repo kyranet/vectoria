@@ -26,8 +26,8 @@ export class HorizontalLineTo extends BasePath<'H' | 'h'> {
 	public readonly end: Coordinate;
 	public readonly entries: HorizontalLineTo.Part[];
 
-	public constructor(type: 'H' | 'h', parent: VectorPath, previousCoordinate: Coordinate, entries: HorizontalLineTo.Data[]) {
-		super(type, parent, previousCoordinate);
+	public constructor(type: 'H' | 'h', siblings: VectorPath.PathEntry[], previousCoordinate: Coordinate, entries: HorizontalLineTo.Data[]) {
+		super(type, siblings, previousCoordinate);
 		this.entries = [];
 
 		let lastEndCoordinate = this.start;

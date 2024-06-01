@@ -1,3 +1,10 @@
+import {
+	EditorAttributesAccumulative,
+	EditorAttributesAdditive,
+	EditorAttributesBegin,
+	EditorAttributesFill,
+	EditorAttributesHref
+} from '#components';
 import { BaseAnimationElement } from './base/BaseAnimationElement';
 import { maybeParseAnimationMotionRotate, type AnimateMotionRotate } from './shared/maybeParseAnimateMotionRotate';
 import { maybeParseListOfValues } from './shared/maybeParseListOfValues';
@@ -14,7 +21,11 @@ export class VectorAnimateMotion extends BaseAnimationElement<SVGAnimateMotionEl
 	private _rotate: AnimateMotionRotate;
 
 	public constructor(element: SVGAnimateMotionElement) {
-		super({ element, title: 'AnimateMotion' });
+		super({
+			element,
+			title: 'AnimateMotion',
+			inputs: [EditorAttributesAccumulative, EditorAttributesAdditive, EditorAttributesBegin, EditorAttributesFill, EditorAttributesHref]
+		});
 		this._keyPoints = maybeParseListOfValues(element.getAttribute(Attr.KeyPoints));
 		this._path = element.getAttribute(Attr.Path) ?? undefined;
 		this._rotate = maybeParseAnimationMotionRotate(element.getAttribute(Attr.Rotate)) ?? 0;

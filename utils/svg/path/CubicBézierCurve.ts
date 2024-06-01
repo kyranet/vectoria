@@ -39,8 +39,8 @@ export class CubicBézierCurve extends BasePath<'C' | 'c'> {
 	public readonly entries: CubicBézierCurve.Part[];
 	public readonly end: Coordinate;
 
-	public constructor(type: 'C' | 'c', parent: VectorPath, previousCoordinate: Coordinate, entries: CubicBézierCurve.Data[]) {
-		super(type, parent, previousCoordinate);
+	public constructor(type: 'C' | 'c', siblings: VectorPath.PathEntry[], previousCoordinate: Coordinate, entries: CubicBézierCurve.Data[]) {
+		super(type, siblings, previousCoordinate);
 		this.entries = [];
 
 		let lastEndCoordinate = this.start;

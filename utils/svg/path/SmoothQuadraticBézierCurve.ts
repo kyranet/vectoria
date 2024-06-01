@@ -2,8 +2,8 @@ import type { Peekable } from '@sapphire/iterator-utilities';
 import type { VectorPath } from '../VectorPath';
 import type { Coordinate } from '../shared/Coordinate';
 import { BasePath } from './base/BasePath';
-import { SmoothQuadraticBézierCurvePart } from './parts/SmoothQuadraticBézierCurvePart';
 import { readNumber } from './parser/readNumber';
+import { SmoothQuadraticBézierCurvePart } from './parts/SmoothQuadraticBézierCurvePart';
 
 /**
  * Draw a smooth quadratic Bézier curve from the current point to the end point
@@ -33,8 +33,13 @@ export class SmoothQuadraticBézierCurve extends BasePath<'T' | 't'> {
 	public readonly end: Coordinate;
 	public readonly entries: SmoothQuadraticBézierCurve.Part[];
 
-	public constructor(type: 'T' | 't', parent: VectorPath, previousCoordinate: Coordinate, entries: SmoothQuadraticBézierCurve.Data[]) {
-		super(type, parent, previousCoordinate);
+	public constructor(
+		type: 'T' | 't',
+		siblings: VectorPath.PathEntry[],
+		previousCoordinate: Coordinate,
+		entries: SmoothQuadraticBézierCurve.Data[]
+	) {
+		super(type, siblings, previousCoordinate);
 		this.entries = [];
 
 		let lastEndCoordinate = this.start;

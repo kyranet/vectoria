@@ -6,7 +6,7 @@ export class HorizontalLineToPart extends BasePathPart<HorizontalLineTo> {
 	/**
 	 * The `x`-coordinate of the end point.
 	 */
-	public readonly x: number;
+	public x: number;
 
 	public constructor(parent: HorizontalLineTo, start: Coordinate, data: HorizontalLineToPart.Data) {
 		super(parent, start);

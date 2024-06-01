@@ -25,8 +25,8 @@ export class MoveTo extends BasePath<'M' | 'm'> {
 	public readonly end: Coordinate;
 	public readonly entries: MoveTo.Part[];
 
-	public constructor(type: 'M' | 'm', parent: VectorPath, previousCoordinate: Coordinate, entries: MoveTo.Data[]) {
-		super(type, parent, previousCoordinate);
+	public constructor(type: 'M' | 'm', siblings: VectorPath.PathEntry[], previousCoordinate: Coordinate, entries: MoveTo.Data[]) {
+		super(type, siblings, previousCoordinate);
 		this.entries = [];
 
 		let lastEndCoordinate = this.start;

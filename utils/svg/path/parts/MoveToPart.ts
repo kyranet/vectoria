@@ -6,12 +6,12 @@ export class MoveToPart extends BasePathPart<MoveTo> {
 	/**
 	 * The `x`-coordinate of the end point.
 	 */
-	public readonly x: number;
+	public x: number;
 
 	/**
 	 * The `y`-coordinate of the end point.
 	 */
-	public readonly y: number;
+	public y: number;
 
 	public constructor(parent: MoveTo, start: Coordinate, data: MoveToPart.Data) {
 		super(parent, start);

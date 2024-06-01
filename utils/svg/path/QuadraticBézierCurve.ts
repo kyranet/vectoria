@@ -32,8 +32,8 @@ export class QuadraticBézierCurve extends BasePath<'Q' | 'q'> {
 	public readonly end: Coordinate;
 	public readonly entries: QuadraticBézierCurve.Part[];
 
-	public constructor(type: 'Q' | 'q', parent: VectorPath, previousCoordinate: Coordinate, entries: QuadraticBézierCurve.Data[]) {
-		super(type, parent, previousCoordinate);
+	public constructor(type: 'Q' | 'q', siblings: VectorPath.PathEntry[], previousCoordinate: Coordinate, entries: QuadraticBézierCurve.Data[]) {
+		super(type, siblings, previousCoordinate);
 		this.entries = [];
 
 		let lastEndCoordinate = this.start;

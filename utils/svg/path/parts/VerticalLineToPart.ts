@@ -6,7 +6,7 @@ export class VerticalLineToPart extends BasePathPart<VerticalLineTo> {
 	/**
 	 * The `y`-coordinate of the end point.
 	 */
-	public readonly y: number;
+	public y: number;
 
 	public constructor(parent: VerticalLineTo, start: Coordinate, data: VerticalLineToPart.Data) {
 		super(parent, start);

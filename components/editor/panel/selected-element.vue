@@ -4,6 +4,8 @@
 			<div ref="draggablePanel" class="cursor-ns-resize border-2 border-base-300 hover:border-primary"></div>
 			<section class="p-4">
 				<span class="text-xl font-bold">{{ element.title }}</span>
+
+				<component v-for="input of element.inputs" :key="input.id" :is="input.component" :el="element.element" />
 			</section>
 		</div>
 	</template>
@@ -21,5 +23,13 @@ const { y: draggablePanelY } = useDraggable(draggablePanel, { axis: 'y', initial
 .panel-selected-element {
 	min-height: 64px;
 	@apply absolute bottom-0 left-0 w-full bg-base-200;
+}
+
+.panel-selected-element :deep(.input) {
+	@apply input-sm input-bordered font-mono;
+}
+
+.panel-selected-element :deep(.select) {
+	@apply select-bordered select-sm font-mono;
 }
 </style>

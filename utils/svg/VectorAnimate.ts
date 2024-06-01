@@ -1,3 +1,11 @@
+import {
+	EditorAttributesAccumulative,
+	EditorAttributesAdditive,
+	EditorAttributesAttributeName,
+	EditorAttributesBegin,
+	EditorAttributesFill,
+	EditorAttributesHref
+} from '#components';
 import { BaseAnimationElement } from './base/BaseAnimationElement';
 import { maybeParseListOfValues } from './shared/maybeParseListOfValues';
 
@@ -17,7 +25,18 @@ export class VectorAnimate extends BaseAnimationElement<SVGAnimateElement, 'anim
 	private _values: string[] | undefined;
 
 	public constructor(element: SVGAnimateElement) {
-		super({ element, title: 'Animate' });
+		super({
+			element,
+			title: 'Animate',
+			inputs: [
+				EditorAttributesAccumulative,
+				EditorAttributesAdditive,
+				EditorAttributesAttributeName,
+				EditorAttributesBegin,
+				EditorAttributesFill,
+				EditorAttributesHref
+			]
+		});
 		this._attributeName = element.getAttribute(Attr.AttributeName) ?? undefined;
 		this._from = element.getAttribute(Attr.From) ?? undefined;
 		this._to = element.getAttribute(Attr.To) ?? undefined;

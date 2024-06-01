@@ -6,12 +6,12 @@ export class LineToPart extends BasePathPart<LineTo> {
 	/**
 	 * The `x`-coordinate of the end point.
 	 */
-	public readonly x: number;
+	public x: number;
 
 	/**
 	 * The `y`-coordinate of the end point.
 	 */
-	public readonly y: number;
+	public y: number;
 
 	public constructor(parent: LineTo, start: Coordinate, data: LineToPart.Data) {
 		super(parent, start);

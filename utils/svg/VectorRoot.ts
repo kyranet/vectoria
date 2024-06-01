@@ -1,3 +1,4 @@
+import { EditorAttributesHeight } from '#components';
 import { BaseGraphicsVectorElement } from './base/BaseGraphicsVectorElement';
 import { BaseVectorElement } from './base/BaseVectorElement';
 import { makeVectorElement } from './shared/makeVectorElement';
@@ -12,7 +13,7 @@ export class VectorRoot extends BaseGraphicsVectorElement<SVGSVGElement, 'svg'> 
 	public children: BaseVectorElement<SVGElement, string>[];
 
 	public constructor(element: SVGSVGElement) {
-		super({ element, title: 'SVG' });
+		super({ element, title: 'SVG', inputs: [EditorAttributesHeight] });
 		this.viewBox = element.viewBox.baseVal;
 		this.xmlns = element.getAttribute('xmlns') ?? undefined;
 		this.x = element.x.baseVal;

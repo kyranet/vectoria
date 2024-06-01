@@ -1,7 +1,8 @@
+import { EditorAttributesDecoding, EditorAttributesHeight, EditorAttributesHref } from '#components';
 import { BaseGraphicsVectorElement } from './base/BaseGraphicsVectorElement';
 
 export class VectorImage extends BaseGraphicsVectorElement<SVGImageElement, 'image'> {
 	public constructor(element: SVGImageElement) {
-		super({ element, title: 'Image' });
+		super({ element, title: 'Image', inputs: [EditorAttributesHref, EditorAttributesDecoding, EditorAttributesHeight] });
 	}
 }

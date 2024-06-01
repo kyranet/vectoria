@@ -6,37 +6,37 @@ export class ArcCurvePart extends BasePathPart<ArcCurve> {
 	/**
 	 * The `x`-radius of the ellipse.
 	 */
-	public readonly rx: number;
+	public rx: number;
 
 	/**
 	 * The `y`-radius of the ellipse.
 	 */
-	public readonly ry: number;
+	public ry: number;
 
 	/**
 	 * The rotation (in degrees) of the ellipse relative to the x-axis.
 	 */
-	public readonly angle: number;
+	public angle: number;
 
 	/**
 	 * The large-arc-flag allows a choice of large arc (`1`) or small arc (`0`).
 	 */
-	public readonly largeArcFlag: boolean;
+	public largeArcFlag: boolean;
 
 	/**
 	 * The sweep-flag allows a choice of a clockwise arc (`1`) or counterclockwise arc (`0`).
 	 */
-	public readonly sweepFlag: boolean;
+	public sweepFlag: boolean;
 
 	/**
 	 * The `x`-coordinate of the end point.
 	 */
-	public readonly x: number;
+	public x: number;
 
 	/**
 	 * The `y`-coordinate of the end point.
 	 */
-	public readonly y: number;
+	public y: number;
 
 	public constructor(parent: ArcCurve, start: Coordinate, data: ArcCurvePart.Data) {
 		super(parent, start);

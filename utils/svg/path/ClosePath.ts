@@ -10,9 +10,9 @@ import { BasePath } from './base/BasePath';
 export class ClosePath extends BasePath<'Z' | 'z'> {
 	public readonly end: Coordinate;
 
-	public constructor(type: 'Z' | 'z', parent: VectorPath, previousCoordinate: Coordinate) {
-		super(type, parent, previousCoordinate);
-		this.end = parent.start;
+	public constructor(type: 'Z' | 'z', siblings: VectorPath.PathEntry[], previousCoordinate: Coordinate) {
+		super(type, siblings, previousCoordinate);
+		this.end = siblings.length > 0 ? siblings[0].start : { x: 0, y: 0 };
 	}
 
 	public isRelative(): boolean {

@@ -6,11 +6,11 @@ export class SmoothQuadraticBézierCurvePart extends BasePathPart<SmoothQuadrati
 	/**
 	 * The `x`-coordinate of the control point.
 	 */
-	public readonly x: number;
+	public x: number;
 	/**
 	 * The `y`-coordinate of the control point.
 	 */
-	public readonly y: number;
+	public y: number;
 
 	public constructor(parent: SmoothQuadraticBézierCurve, start: Coordinate, data: SmoothQuadraticBézierCurvePart.Data) {
 		super(parent, start);

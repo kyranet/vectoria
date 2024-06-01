@@ -1,3 +1,4 @@
+import { EditorAttributesFill, EditorAttributesFillOpacity, EditorAttributesFillRule } from '#components';
 import { VectorPath } from './VectorPath';
 import { BaseGeometryVectorElement } from './base/BaseGeometryVectorElement';
 
@@ -5,7 +6,7 @@ export class VectorPolyline extends BaseGeometryVectorElement<SVGPolylineElement
 	public readonly points: SVGPointList;
 
 	public constructor(element: SVGPolylineElement) {
-		super({ element, title: 'Polyline' });
+		super({ element, title: 'Polyline', inputs: [EditorAttributesFill, EditorAttributesFillOpacity, EditorAttributesFillRule] });
 		this.points = element.points;
 	}
 

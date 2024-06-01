@@ -1,3 +1,4 @@
+import { EditorAttributesHref } from '#components';
 import { BaseGraphicsVectorElement } from './base/BaseGraphicsVectorElement';
 import type { MIMEType, TargetType } from './types/dom';
 
@@ -10,7 +11,7 @@ export class VectorA extends BaseGraphicsVectorElement<SVGAElement, 'a'> {
 	public type: MIMEType | undefined;
 
 	public constructor(element: SVGAElement) {
-		super({ element, title: 'Anchor' });
+		super({ element, title: 'Anchor', inputs: [EditorAttributesHref] });
 		this.download = element.getAttribute('download') ?? undefined;
 		this.href = element.href.baseVal;
 		this.referredPolicy = (element.getAttribute('referrerpolicy') ?? undefined) as ReferrerPolicy | undefined;

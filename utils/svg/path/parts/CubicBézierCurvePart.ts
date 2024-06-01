@@ -6,27 +6,27 @@ export class CubicBézierCurvePart extends BasePathPart<CubicBézierCurve> {
 	/**
 	 * The `x`-coordinate of the first control point.
 	 */
-	public readonly x1: number;
+	public x1: number;
 	/**
 	 * The `y`-coordinate of the first control point.
 	 */
-	public readonly y1: number;
+	public y1: number;
 	/**
 	 * The `x`-coordinate of the second control point.
 	 */
-	public readonly x2: number;
+	public x2: number;
 	/**
 	 * The `y`-coordinate of the second control point.
 	 */
-	public readonly y2: number;
+	public y2: number;
 	/**
 	 * The `x`-coordinate of the end point.
 	 */
-	public readonly x: number;
+	public x: number;
 	/**
 	 * The `y`-coordinate of the end point.
 	 */
-	public readonly y: number;
+	public y: number;
 
 	public constructor(parent: CubicBézierCurve, start: Coordinate, data: CubicBézierCurvePart.Data) {
 		super(parent, start);

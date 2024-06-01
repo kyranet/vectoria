@@ -1,3 +1,4 @@
+import { EditorAttributesFill, EditorAttributesFillOpacity } from '#components';
 import { VectorPath } from './VectorPath';
 import { BaseGeometryVectorElement } from './base/BaseGeometryVectorElement';
 
@@ -8,7 +9,7 @@ export class VectorEllipse extends BaseGeometryVectorElement<SVGEllipseElement, 
 	public ry: SVGLength;
 
 	public constructor(element: SVGEllipseElement) {
-		super({ element, title: 'Ellipse' });
+		super({ element, title: 'Ellipse', inputs: [EditorAttributesFill, EditorAttributesFillOpacity] });
 		this.cx = element.cx.baseVal;
 		this.cy = element.cy.baseVal;
 		this.rx = element.rx.baseVal;

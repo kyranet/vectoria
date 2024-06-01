@@ -8,6 +8,10 @@
 		vertical-align: text-bottom !important;
 	}
 
+	.input {
+		@apply min-w-0 placeholder:text-base-content/60 disabled:text-base-content/60;
+	}
+
 	.prose {
 		@apply max-w-none;
 	}

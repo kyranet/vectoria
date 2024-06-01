@@ -32,8 +32,8 @@ export class SmoothCubicBézierCurve extends BasePath<'S' | 's'> {
 	public readonly end: Coordinate;
 	public readonly entries: SmoothCubicBézierCurve.Part[];
 
-	public constructor(type: 'S' | 's', parent: VectorPath, previousCoordinate: Coordinate, entries: SmoothCubicBézierCurve.Data[]) {
-		super(type, parent, previousCoordinate);
+	public constructor(type: 'S' | 's', siblings: VectorPath.PathEntry[], previousCoordinate: Coordinate, entries: SmoothCubicBézierCurve.Data[]) {
+		super(type, siblings, previousCoordinate);
 		this.entries = [];
 
 		let lastEndCoordinate = this.start;

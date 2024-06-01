@@ -26,8 +26,8 @@ export class VerticalLineTo extends BasePath<'V' | 'v'> {
 	public readonly end: Coordinate;
 	public readonly entries: VerticalLineTo.Part[];
 
-	public constructor(type: 'V' | 'v', parent: VectorPath, previousCoordinate: Coordinate, entries: VerticalLineTo.Data[]) {
-		super(type, parent, previousCoordinate);
+	public constructor(type: 'V' | 'v', siblings: VectorPath.PathEntry[], previousCoordinate: Coordinate, entries: VerticalLineTo.Data[]) {
+		super(type, siblings, previousCoordinate);
 		this.entries = [];
 
 		let lastEndCoordinate = this.start;

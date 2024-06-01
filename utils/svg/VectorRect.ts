@@ -1,3 +1,4 @@
+import { EditorAttributesFill, EditorAttributesFillOpacity, EditorAttributesHeight } from '#components';
 import { VectorPath } from './VectorPath';
 import { BaseGeometryVectorElement } from './base/BaseGeometryVectorElement';
 import { setLength } from './shared/setLength';
@@ -11,7 +12,7 @@ export class VectorRect extends BaseGeometryVectorElement<SVGRectElement, 'rect'
 	private _ry: SVGLength;
 
 	public constructor(element: SVGRectElement) {
-		super({ element, title: 'Rectangle' });
+		super({ element, title: 'Rectangle', inputs: [EditorAttributesHeight, EditorAttributesFill, EditorAttributesFillOpacity] });
 		this._x = element.x.baseVal;
 		this._y = element.y.baseVal;
 		this._width = element.width.baseVal;

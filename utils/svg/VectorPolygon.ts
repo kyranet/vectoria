@@ -1,3 +1,4 @@
+import { EditorAttributesFill, EditorAttributesFillOpacity, EditorAttributesFillRule } from '#components';
 import { VectorPath } from './VectorPath';
 import { BaseGeometryVectorElement } from './base/BaseGeometryVectorElement';
 
@@ -5,7 +6,7 @@ export class VectorPolygon extends BaseGeometryVectorElement<SVGPolygonElement, 
 	public readonly points: SVGPointList;
 
 	public constructor(element: SVGPolygonElement) {
-		super({ element, title: 'Polygon' });
+		super({ element, title: 'Polygon', inputs: [EditorAttributesFill, EditorAttributesFillOpacity, EditorAttributesFillRule] });
 		this.points = element.points;
 	}
 

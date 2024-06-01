@@ -6,22 +6,22 @@ export class QuadraticBézierCurvePart extends BasePathPart<QuadraticBézierCurv
 	/**
 	 * The `x`-coordinate of the control point.
 	 */
-	public readonly x1: number;
+	public x1: number;
 
 	/**
 	 * The `y`-coordinate of the control point.
 	 */
-	public readonly y1: number;
+	public y1: number;
 
 	/**
 	 * The `x`-coordinate of the end point.
 	 */
-	public readonly x: number;
+	public x: number;
 
 	/**
 	 * The `y`-coordinate of the end point.
 	 */
-	public readonly y: number;
+	public y: number;
 
 	public constructor(parent: QuadraticBézierCurve, start: Coordinate, data: QuadraticBézierCurvePart.Data) {
 		super(parent, start);

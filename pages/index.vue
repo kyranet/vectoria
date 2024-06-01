@@ -8,9 +8,9 @@
 			<div class="m-4 flex-grow overflow-auto">
 				<div
 					ref="parent"
-					class="relative border-2"
-					:class="{ 'border-base-content': svgNode, 'border-error': errorNode }"
-					:style="{ width: scaledSize.width, height: scaledSize.height }"
+					class="set-svg-dimensions relative m-0.5 outline outline-2"
+					:class="{ 'outline-base-content/80': svgNode, 'outline-error': errorNode }"
+					:style="{ '--width': scaledSize.width, '--height': scaledSize.height }"
 				>
 					<div></div>
 					<!-- <editor-svg v-if="svgNode" :el="svgNode" /> -->
@@ -44,9 +44,9 @@
 				<li class="flex max-w-96 flex-grow items-center gap-2">
 					<button class="btn btn-ghost" @click="scale = 1" :disabled="scale === 1">Reset</button>
 					<input v-model="scale" type="range" min="0.1" max="5" step="0.1" class="range" />
-					<label class="input input-ghost flex items-center gap-2">
+					<label class="input input-ghost flex items-center">
 						<input v-model="scale100" type="number" min="0.1" max="500" class="max-w-16 grow" />
-						%
+						<span class="shrink-0">%</span>
 					</label>
 				</li>
 			</ul>
@@ -125,3 +125,14 @@ if (process.client) {
 	}
 }
 </script>
+
+<style scoped>
+.set-svg-dimensions {
+	width: var(--width);
+	height: var(--height);
+}
+
+.set-svg-dimensions :deep(svg) {
+	@apply h-full w-full;
+}
+</style>

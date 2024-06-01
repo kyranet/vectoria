@@ -1,3 +1,11 @@
+import {
+	EditorAttributesAccumulative,
+	EditorAttributesAdditive,
+	EditorAttributesAttributeName,
+	EditorAttributesBegin,
+	EditorAttributesFill,
+	EditorAttributesHref
+} from '#components';
 import { BaseAnimationElement } from './base/BaseAnimationElement';
 
 enum Attr {
@@ -16,7 +24,18 @@ export class VectorAnimateTransform extends BaseAnimationElement<SVGAnimateTrans
 	private _by: string | undefined;
 
 	public constructor(element: SVGAnimateTransformElement) {
-		super({ element, title: 'AnimateTransform' });
+		super({
+			element,
+			title: 'AnimateTransform',
+			inputs: [
+				EditorAttributesAccumulative,
+				EditorAttributesAdditive,
+				EditorAttributesAttributeName,
+				EditorAttributesBegin,
+				EditorAttributesFill,
+				EditorAttributesHref
+			]
+		});
 		this._type = (element.getAttribute(Attr.Type) as AnimateTransformType) ?? undefined;
 		this._from = element.getAttribute(Attr.From) ?? undefined;
 		this._to = element.getAttribute(Attr.To) ?? undefined;

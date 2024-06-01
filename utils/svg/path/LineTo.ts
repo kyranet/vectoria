@@ -25,8 +25,8 @@ export class LineTo extends BasePath<'L' | 'l'> {
 	public readonly end: Coordinate;
 	public readonly entries: LineTo.Part[];
 
-	public constructor(type: 'L' | 'l', parent: VectorPath, previousCoordinate: Coordinate, entries: LineTo.Data[]) {
-		super(type, parent, previousCoordinate);
+	public constructor(type: 'L' | 'l', siblings: VectorPath.PathEntry[], previousCoordinate: Coordinate, entries: LineTo.Data[]) {
+		super(type, siblings, previousCoordinate);
 		this.entries = [];
 
 		let lastEndCoordinate = this.start;
