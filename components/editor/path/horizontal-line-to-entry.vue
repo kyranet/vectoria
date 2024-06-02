@@ -1,25 +1,26 @@
 <template>
-	<span>
-		<icon-axis-x class="h-5 w-5" />
-		{{ x }}
-		<span class="text-base-content-readonly">
-			<icon-axis-y class="h-5 w-5" />
-			{{ y }}
-		</span>
-	</span>
+	<editor-path-part-base :el="el" :index="index" @update="$emit('update', el)">
+		<div class="input grid grid-cols-2 gap-2">
+			<label class="flex gap-2">
+				<span>X</span>
+				<input v-model="x" class="min-w-0" type="number" min="0" />
+			</label>
+			<label class="flex gap-2">
+				<span>Y</span>
+				<input :value="y" class="min-w-0" type="number" disabled="true" />
+			</label>
+		</div>
+	</editor-path-part-base>
 </template>
 
 <script setup lang="ts">
 import type { HorizontalLineToPart } from '~/utils/svg/path/parts/HorizontalLineToPart';
 
-const props = defineProps<{ el: HorizontalLineToPart }>();
+const props = defineProps<{ el: HorizontalLineToPart; index: number }>();
 const emit = defineEmits<{
 	(event: 'update', value: HorizontalLineToPart): void;
 }>();
 
-const x = computed({
-	get: () => props.el.x,
-	set: (value: number) => ((props.el.x = value), emit('update', props.el))
-});
+const x = usePathPartProperty(props.el, 'x', emit);
 const y = computed(() => props.el.end.y);
 </script>

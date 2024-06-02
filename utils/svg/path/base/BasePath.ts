@@ -4,7 +4,7 @@ import type { Coordinate } from '../../shared/Coordinate';
 export abstract class BasePath<Type extends string> {
 	public readonly type: Type;
 	public readonly siblings: VectorPath.PathEntry[];
-	public readonly index: number;
+	public index: number;
 	public readonly start: Coordinate;
 	public abstract readonly end: Coordinate;
 

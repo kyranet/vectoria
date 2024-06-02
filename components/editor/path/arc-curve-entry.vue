@@ -1,66 +1,55 @@
 <template>
-	<span>
-		<icon-ellipse-x-radius class="h-5 w-5" />
-		{{ rx }}
-		<icon-ellipse-y-radius class="h-5 w-5" />
-		{{ ry }}
-	</span>
-	<span>
-		<icon-angle class="h-5 w-5" />
-		{{ angle }}º
-	</span>
-	<div class="join">
-		<button class="btn join-item">
-			<icon-arc-large v-if="largeArcFlag" class="h-5 w-5" />
-			<icon-arc-short v-else class="h-5 w-5" />
-		</button>
-		<button class="btn join-item">
-			<icon-circle-anticlockwise v-if="sweepFlag" class="h-5 w-5" />
-			<icon-circle-clockwise v-else class="h-5 w-5" />
-		</button>
-	</div>
-	<span>
-		<icon-axis-x class="h-5 w-5" />
-		{{ x }}
-		<icon-axis-y class="h-5 w-5" />
-		{{ y }}
-	</span>
+	<editor-path-part-base :el="el" :index="index" @update="$emit('update', el)">
+		<div class="input input-bordered grid grid-cols-2 gap-2">
+			<label class="flex gap-2">
+				<span><icon-ellipse-x-radius class="h-5 w-5" /></span>
+				<input v-model="rx" class="min-w-0" type="number" min="0" />
+			</label>
+			<label class="flex gap-2">
+				<span><icon-ellipse-y-radius class="h-5 w-5" /></span>
+				<input v-model="ry" class="min-w-0" type="number" min="0" />
+			</label>
+		</div>
+		<div class="join w-full">
+			<label class="input join-item flex grow items-center">
+				<input v-model="angle" class="grow text-right" type="number" min="0" max="360" />
+				<span>deg</span>
+			</label>
+			<button class="btn btn-ghost join-item btn-sm border-base-content/20 bg-base-100" @click="largeArcFlag = !largeArcFlag">
+				<icon-arc-large v-if="largeArcFlag" class="h-5 w-5" />
+				<icon-arc-short v-else class="h-5 w-5" />
+			</button>
+			<button class="btn btn-ghost join-item btn-sm border-base-content/20 bg-base-100" @click="sweepFlag = !sweepFlag">
+				<icon-circle-anticlockwise v-if="sweepFlag" class="h-5 w-5" />
+				<icon-circle-clockwise v-else class="h-5 w-5" />
+			</button>
+		</div>
+		<div class="input grid grid-cols-2 gap-2">
+			<label class="flex gap-2">
+				<span>X</span>
+				<input v-model="x" class="min-w-0" type="number" min="0" />
+			</label>
+			<label class="flex gap-2">
+				<span>Y</span>
+				<input v-model="y" class="min-w-0" type="number" min="0" />
+			</label>
+		</div>
+	</editor-path-part-base>
 </template>
 
 <script setup lang="ts">
 import type { ArcCurvePart } from '~/utils/svg/path/parts/ArcCurvePart';
 
-const props = defineProps<{ el: ArcCurvePart }>();
+const props = defineProps<{ el: ArcCurvePart; index: number }>();
 const emit = defineEmits<{
 	(event: 'update', value: ArcCurvePart): void;
 }>();
 
-const rx = computed({
-	get: () => props.el.rx,
-	set: (value: number) => ((props.el.rx = value), emit('update', props.el))
-});
-const ry = computed({
-	get: () => props.el.ry,
-	set: (value: number) => ((props.el.ry = value), emit('update', props.el))
-});
-const angle = computed({
-	get: () => props.el.angle,
-	set: (value: number) => ((props.el.angle = value), emit('update', props.el))
-});
-const largeArcFlag = computed({
-	get: () => props.el.largeArcFlag,
-	set: (value: boolean) => ((props.el.largeArcFlag = value), emit('update', props.el))
-});
-const sweepFlag = computed({
-	get: () => props.el.sweepFlag,
-	set: (value: boolean) => ((props.el.sweepFlag = value), emit('update', props.el))
-});
-const x = computed({
-	get: () => props.el.x,
-	set: (value: number) => ((props.el.x = value), emit('update', props.el))
-});
-const y = computed({
-	get: () => props.el.y,
-	set: (value: number) => ((props.el.y = value), emit('update', props.el))
-});
+const rx = usePathPartProperty(props.el, 'rx', emit);
+const ry = usePathPartProperty(props.el, 'ry', emit);
+const angle = usePathPartProperty(props.el, 'angle', emit);
+const largeArcFlag = usePathPartProperty(props.el, 'largeArcFlag', emit);
+const sweepFlag = usePathPartProperty(props.el, 'sweepFlag', emit);
+const x = usePathPartProperty(props.el, 'x', emit);
+const y = usePathPartProperty(props.el, 'y', emit);
 </script>
