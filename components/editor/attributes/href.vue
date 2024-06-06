@@ -7,7 +7,7 @@
 				<editor-attributes-common-animation animatable="yes" />
 			</span>
 		</div>
-		<input v-model="value" type="url" placeholder="unset" class="input" />
+		<input v-model="value" type="text" placeholder="unset" class="input" />
 	</label>
 </template>
 
@@ -29,5 +29,5 @@ const props = defineProps<{
 		| SVGTextPathElement
 		| SVGUseElement;
 }>();
-const value = useAttribute(props.el, 'href');
+const value = useAttribute(props.el, ['href', 'xlink:href']);
 </script>

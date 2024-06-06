@@ -17,11 +17,7 @@ const props = defineProps<{ el: LengthPercentageElement | LengthPercentageAutoEl
 const supportsAuto = ['foreignObject', 'image', 'rect', 'svg', 'use'].includes(props.el.tagName);
 const supportsPercentage = props.el.tagName !== 'pattern';
 
-const value = useAttribute(
-	props.el,
-	'height',
-	supportsAuto ? 'auto' : supportsPercentage ? (['filter', 'mask'].includes(props.el.tagName) ? '120%' : '100%') : '0'
-);
+const value = useAttribute(props.el, 'height', getDefaultValue(props.el.tagName));
 
 type LengthPercentageElement =
 	| SVGFEBlendElement
@@ -45,6 +41,15 @@ type LengthPercentageElement =
 	| SVGMaskElement;
 type LengthPercentageAutoElement = SVGForeignObjectElement | SVGImageElement | SVGRectElement | SVGSVGElement | SVGUseElement;
 type LengthElement = SVGPatternElement;
+
+function getDefaultValue(tag: string) {
+	if (supportsAuto) return 'auto';
+	if (supportsPercentage) {
+		return ['filter', 'mask'].includes(tag) ? '120%' : '100%';
+	}
+
+	return '0';
+}
 </script>
 
 <!-- import { makeAttribute } from '../../../utils/svg/attributes/base/makeAttribute';

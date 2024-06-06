@@ -1,5 +1,9 @@
 <template>
 	<div class="editor-panel relative" :style="{ width: `${draggablePanelX}px` }">
+		<div class="flex items-center gap-2">
+			<icon-logo class="w-10 h-10 translate-y-0.5" />
+			<span class="font-semibold text-xl">Vectoria</span>
+		</div>
 		<div role="tablist" class="tabs-boxed tabs">
 			<a role="tab" class="tab" :class="{ 'tab-active': tabEditor }" @click="tabEditor = true">Editor</a>
 			<a role="tab" class="tab" :class="{ 'tab-active': !tabEditor }" @click="tabEditor = false">Code</a>

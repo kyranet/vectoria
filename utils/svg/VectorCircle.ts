@@ -1,4 +1,4 @@
-import { EditorAttributesFill, EditorAttributesFillOpacity } from '#components';
+import { EditorAttributesFill, EditorAttributesFillOpacity, EditorAttributesR } from '#components';
 import { VectorPath } from './VectorPath';
 import { BaseGeometryVectorElement } from './base/BaseGeometryVectorElement';
 
@@ -8,7 +8,7 @@ export class VectorCircle extends BaseGeometryVectorElement<SVGCircleElement, 'c
 	public r: SVGLength;
 
 	public constructor(element: SVGCircleElement) {
-		super({ element, title: 'Circle', inputs: [EditorAttributesFill, EditorAttributesFillOpacity] });
+		super({ element, title: 'Circle', inputs: [EditorAttributesR, EditorAttributesFill, EditorAttributesFillOpacity] });
 		this.cx = element.cx.baseVal;
 		this.cy = element.cy.baseVal;
 		this.r = element.r.baseVal;

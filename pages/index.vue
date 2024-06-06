@@ -65,6 +65,11 @@
 <script setup lang="ts">
 import { VectorRoot } from '~/utils/svg/VectorRoot';
 
+defineSeo({
+	title: 'Vectoria',
+	description: 'A complete SVG editor for all your needs',
+});
+
 const input = ref('');
 provide(InjectedCodeInput, input);
 

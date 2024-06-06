@@ -1,4 +1,4 @@
-import { EditorAttributesHeight, EditorAttributesHref } from '#components';
+import { EditorAttributesHeight, EditorAttributesHref, EditorAttributesWidth } from '#components';
 import { BaseGraphicsVectorElement } from './base/BaseGraphicsVectorElement';
 
 export class VectorUse extends BaseGraphicsVectorElement<SVGUseElement, 'use'> {
@@ -9,7 +9,7 @@ export class VectorUse extends BaseGraphicsVectorElement<SVGUseElement, 'use'> {
 	public href: string;
 
 	public constructor(element: SVGUseElement) {
-		super({ element, title: 'Use', inputs: [EditorAttributesHref, EditorAttributesHeight] });
+		super({ element, title: 'Use', inputs: [EditorAttributesHref, EditorAttributesWidth, EditorAttributesHeight] });
 		this.x = element.x.baseVal;
 		this.y = element.y.baseVal;
 		this.width = element.width.baseVal;

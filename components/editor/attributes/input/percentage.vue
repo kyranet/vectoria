@@ -1,6 +1,6 @@
 <template>
 	<div class="input flex items-center gap-1">
-		<input v-model="value" type="number" class="min-w-0 grow" />
+		<input v-model="value" type="number" class="min-w-0 grow" :step="unit === '%' ? 1 : 0.01" />
 		<select v-model="unit" class="bg-transparent">
 			<option value=""></option>
 			<option value="%">%</option>
