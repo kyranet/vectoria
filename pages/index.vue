@@ -82,6 +82,15 @@ const errorNode = ref<HTMLElement | null>(null);
 const editorNode = ref<VectorRoot | null>(null);
 const exporter = ref<InstanceType<typeof ExportSvg> | null>(null);
 
+const { ctrl_s } = useMagicKeys({
+	passive: false,
+	onEventFired(e) {
+		if (e.ctrlKey && e.key === 's' && e.type === 'keydown') e.preventDefault();
+	}
+});
+
+whenever(ctrl_s, () => exporter.value?.open());
+
 const draggablePanel = ref<HTMLDivElement>(null!);
 const { x: draggablePanelX } = useDraggable(draggablePanel, { axis: 'x', initialValue: { x: 300, y: 0 } });
 
