@@ -22,6 +22,32 @@
 				</select>
 			</label>
 
+			<div v-show="format !== 'image/svg+xml'" class="form-control mt-2">
+				<div class="label">
+					<span class="label-text">Transform</span>
+				</div>
+				<div class="flex flex-row gap-2">
+					<label class="input input-bordered flex items-center gap-2">
+						<Icon name="material-symbols:width-rounded" class="h-5 w-5 shrink-0" />
+						<input v-model="smartWidth" type="number" class="grow" min="0" />
+					</label>
+
+					<label class="input input-bordered flex items-center gap-2">
+						<Icon name="material-symbols:height-rounded" class="h-5 w-5 shrink-0" />
+						<input v-model="smartHeight" type="number" class="grow" min="0" />
+					</label>
+
+					<button class="btn btn-neutral px-2" @click.prevent="toggleLock">
+						<Icon v-if="locked" name="material-symbols:link-rounded" class="h-8 w-8 text-primary" />
+						<Icon v-else name="material-symbols:link-off-rounded" class="h-8 w-8" />
+					</button>
+
+					<button class="btn btn-neutral px-2" @click.prevent="undo">
+						<Icon name="material-symbols:undo-rounded" class="h-8 w-8" />
+					</button>
+				</div>
+			</div>
+
 			<label v-show="format === 'image/webp' || format === 'image/jpeg'" class="form-control mt-2">
 				<div class="label">
 					<span class="label-text">
@@ -45,9 +71,42 @@ const props = defineProps<{ node: SVGSVGElement }>();
 const format = ref<`image/${'png' | 'webp' | 'jpeg' | 'svg+xml'}`>('image/svg+xml');
 const quality = ref(1);
 
+const width = ref(props.node.width.baseVal.value);
+const height = ref(props.node.height.baseVal.value);
+const ratio = ref(0);
+const locked = ref(true);
+
+const smartWidth = computed({
+	get: () => width.value,
+	set: (value) => {
+		if (locked.value) height.value = Math.round(value * ratio.value);
+		width.value = value;
+	}
+});
+const smartHeight = computed({
+	get: () => height.value,
+	set: (value) => {
+		if (locked.value) width.value = Math.round(value / ratio.value);
+		height.value = value;
+	}
+});
+
+function toggleLock() {
+	if ((locked.value = !locked.value)) {
+		ratio.value = width.value / height.value;
+	}
+}
+
+function undo() {
+	width.value = props.node.width.baseVal.value;
+	height.value = props.node.height.baseVal.value;
+	ratio.value = width.value / height.value;
+}
+
 const opened = ref(false);
 function open() {
 	opened.value = true;
+	undo();
 }
 
 function cancel() {
@@ -56,7 +115,7 @@ function cancel() {
 
 async function download() {
 	const name = `image.${FileExtensions[format.value]}`;
-	downloadURL(await render(props.node, format.value, quality.value), name);
+	downloadURL(await render(props.node, format.value, quality.value, width.value, height.value), name);
 }
 
 const FileExtensions = {

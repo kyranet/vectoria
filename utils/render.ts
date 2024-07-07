@@ -1,23 +1,27 @@
-export function render(svg: SVGSVGElement, format: `image/${'png' | 'webp' | 'jpeg' | 'svg+xml'}`, quality: number) {
+export function render(svg: SVGSVGElement, format: `image/${'png' | 'webp' | 'jpeg' | 'svg+xml'}`, quality: number, width: number, height: number) {
 	if (format === 'image/svg+xml') {
-		return `data:image/svg+xml,${encodeURIComponent(new XMLSerializer().serializeToString(svg))}`;
+		return renderSVG(svg);
 	}
 
 	const canvas = document.createElement('canvas');
 	const ctx = canvas.getContext('2d')!;
 	const img = new Image();
 
-	canvas.width = img.width = svg.width.baseVal.value;
-	canvas.height = img.height = svg.height.baseVal.value;
+	canvas.width = img.width = width;
+	canvas.height = img.height = height;
 
 	return new Promise<string>((resolve, reject) => {
 		img.onload = () => {
-			ctx.drawImage(img, 0, 0);
+			ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 			resolve(canvas.toDataURL(format, quality));
 		};
 		img.onerror = reject;
-		img.src = render(svg, 'image/svg+xml', 1) as string;
+		img.src = renderSVG(svg);
 	});
+}
+
+function renderSVG(svg: SVGSVGElement) {
+	return `data:image/svg+xml,${encodeURIComponent(new XMLSerializer().serializeToString(svg))}`;
 }
 
 export function downloadURL(url: string, name: string) {
