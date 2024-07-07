@@ -52,7 +52,7 @@
 				<div class="label">
 					<span class="label-text">
 						Quality
-						<span role="alert" class="text-base-content/80">({{ quality * 100 }}%)</span>
+						<span role="alert" class="text-base-content/80">({{ Math.round(quality * 100) }}%)</span>
 					</span>
 				</div>
 				<input v-model="quality" type="range" min="0" max="1" step="0.01" class="range" />
@@ -71,8 +71,8 @@ const props = defineProps<{ node: SVGSVGElement }>();
 const format = ref<`image/${'png' | 'webp' | 'jpeg' | 'svg+xml'}`>('image/svg+xml');
 const quality = ref(1);
 
-const width = ref(props.node.width.baseVal.value);
-const height = ref(props.node.height.baseVal.value);
+const width = ref(props.node.viewBox.baseVal.width);
+const height = ref(props.node.viewBox.baseVal.height);
 const ratio = ref(0);
 const locked = ref(true);
 
@@ -86,7 +86,7 @@ const smartWidth = computed({
 const smartHeight = computed({
 	get: () => height.value,
 	set: (value) => {
-		if (locked.value) width.value = Math.round(value / ratio.value);
+		if (locked.value) width.value = Math.round(value * ratio.value);
 		height.value = value;
 	}
 });

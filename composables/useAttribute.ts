@@ -1,6 +1,6 @@
-export function useAttribute(el: SVGElement, attributes: string | [attribute: string, fallbackAttribute?: string], defaultValue: string = '') {
-	return typeof attributes === 'string' || attributes.length === 1
-		? useSingleAttribute(el, attributes[0], defaultValue)
+export function useAttribute(el: SVGElement, attributes: string | [attribute: string, fallbackAttribute: string], defaultValue: string = '') {
+	return typeof attributes === 'string'
+		? useSingleAttribute(el, attributes, defaultValue)
 		: useFallbackAttribute(el, attributes[0], attributes[1]!, defaultValue);
 }
 

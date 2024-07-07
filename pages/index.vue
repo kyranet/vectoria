@@ -1,15 +1,15 @@
 <template>
 	<div class="flex h-screen w-screen flex-row">
 		<!-- @vue-expect-error Vue unwraps the value in a non-functional way -->
-		<editor-panel-side :vector-root="editorNode" :draggable-panel-x="draggablePanelX" :success="svgNode ? true : errorNode ? false : null" />
+		<editor-panel-side :vector-root="editorNode" :draggable-panel-x="draggablePanelX" :success="svgNode ? true : null" />
 		<div ref="draggablePanel" class="cursor-ew-resize border-2 border-base-300 hover:border-primary"></div>
 
-		<div v-show="svgNode || errorNode" class="flex flex-grow flex-col justify-between overflow-hidden rounded-xl bg-base-200 drop-shadow-xl">
+		<import-svg v-if="!svgNode" @submit="onSubmit" />
+		<div v-show="svgNode" class="flex flex-grow flex-col justify-between overflow-hidden rounded-xl bg-base-200 drop-shadow-xl">
 			<div class="m-4 flex-grow overflow-auto">
 				<div
 					ref="parent"
-					class="set-svg-dimensions relative m-0.5 outline outline-2"
-					:class="{ 'outline-base-content/80': svgNode, 'outline-error': errorNode }"
+					class="set-svg-dimensions relative m-0.5 outline outline-2 outline-base-content/80"
 					:style="{ '--width': scaledSize.width, '--height': scaledSize.height }"
 				>
 					<div></div>
@@ -53,14 +53,6 @@
 		</div>
 	</div>
 
-	<div v-show="dropping" class="absolute left-0 top-0 flex h-screen w-screen items-center justify-center bg-base-300/60 backdrop-blur-sm">
-		<div class="rounded-box bg-primary p-4 text-primary-content">
-			<div class="rounded-box p-12 outline outline-8 outline-white/20">
-				<span class="text-4xl font-bold">Drop to load</span>
-			</div>
-		</div>
-	</div>
-
 	<export-svg v-if="svgNode" ref="exporter" :node="svgNode" />
 </template>
 
@@ -73,12 +65,14 @@ defineSeo({
 	description: 'A complete SVG editor for all your needs'
 });
 
-const input = ref('');
-provide(InjectedCodeInput, input);
+function onSubmit(value: SVGSVGElement) {
+	svgNode.value = value;
+	editorNode.value = new VectorRoot(value);
+	parent.value!.firstChild!.replaceWith(value);
+}
 
 const parent = ref<HTMLDivElement | null>(null!);
 const svgNode = ref<SVGSVGElement | null>(null);
-const errorNode = ref<HTMLElement | null>(null);
 const editorNode = ref<VectorRoot | null>(null);
 const exporter = ref<InstanceType<typeof ExportSvg> | null>(null);
 
@@ -109,39 +103,6 @@ const scaledSize = computed(() => {
 	const { width, height } = svgNode.value.viewBox.baseVal;
 	return { width: `${width * scale.value}px`, height: `${height * scale.value}px` };
 });
-
-const dropping = ref(false);
-if (import.meta.client) {
-	const parser = new DOMParser();
-	watch(input, (value) => {
-		const result = parser.parseFromString(value, 'image/svg+xml');
-		const [child] = result.children;
-
-		if (child.tagName === 'svg') {
-			svgNode.value = child as SVGSVGElement;
-			errorNode.value = null;
-			editorNode.value = new VectorRoot(svgNode.value);
-		} else {
-			svgNode.value = null;
-			errorNode.value = child as HTMLElement;
-			editorNode.value = null;
-		}
-
-		parent.value!.firstChild!.replaceWith(child);
-	});
-
-	const { isOverDropZone } = useDropZone(document.body, { onDrop });
-	syncRef(dropping, isOverDropZone);
-
-	async function onDrop(files: File[] | null) {
-		if (!files?.length) return;
-
-		const [file] = files;
-		if (file.type !== 'image/svg+xml') return;
-
-		input.value = (await file.text()).trim();
-	}
-}
 </script>
 
 <style scoped>

@@ -4,13 +4,8 @@
 			<icon-logo class="h-10 w-10 translate-y-0.5" />
 			<span class="text-xl font-semibold">Vectoria</span>
 		</div>
-		<div role="tablist" class="tabs-boxed tabs">
-			<a role="tab" class="tab" :class="{ 'tab-active': tabEditor }" @click="tabEditor = true">Editor</a>
-			<a role="tab" class="tab" :class="{ 'tab-active': !tabEditor }" @click="tabEditor = false">Code</a>
-		</div>
 		<div class="grow">
-			<editor-panel-list v-show="tabEditor" :vector-root="vectorRoot" />
-			<editor-panel-code v-show="!tabEditor" :success="success" />
+			<editor-panel-list :vector-root="vectorRoot" />
 		</div>
 	</div>
 </template>
@@ -19,8 +14,6 @@
 import type { VectorRoot } from '~/utils/svg/VectorRoot';
 
 defineProps<{ vectorRoot: VectorRoot | null; draggablePanelX: number; success: boolean | null }>();
-
-const tabEditor = ref(true);
 </script>
 
 <style scoped>
