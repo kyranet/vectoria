@@ -2,14 +2,16 @@ import type { VectorPath } from '../../VectorPath';
 import type { Coordinate } from '../../shared/Coordinate';
 
 export abstract class BasePath<Type extends string> {
+	public readonly icon: Component;
 	public readonly type: Type;
 	public readonly siblings: VectorPath.PathEntry[];
 	public index: number;
 	public readonly start: Coordinate;
 	public abstract readonly end: Coordinate;
 
-	protected constructor(type: Type, siblings: VectorPath.PathEntry[], start: Coordinate) {
+	protected constructor(icon: Component, type: Type, siblings: VectorPath.PathEntry[], start: Coordinate) {
 		this.type = type;
+		this.icon = markRaw(icon);
 		this.siblings = siblings;
 		this.index = siblings.length;
 		this.start = start;

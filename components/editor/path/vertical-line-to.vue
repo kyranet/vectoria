@@ -1,5 +1,5 @@
 <template>
-	<editor-path-base title="Vertical Line To">
+	<editor-path-base title="Vertical Line To" :icon="el.icon">
 		<editor-path-vertical-line-to-entry
 			v-for="(entry, index) of entries"
 			:key="entry.id"

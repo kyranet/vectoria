@@ -1,5 +1,5 @@
 <template>
-	<editor-path-base title="Smooth Quadratic Bézier Curve">
+	<editor-path-base title="Smooth Quadratic Bézier Curve" :icon="el.icon">
 		<editor-path-smooth-quadratic-bezier-curve-entry
 			v-for="(entry, index) of entries"
 			:key="entry.id"

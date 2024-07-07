@@ -1,3 +1,4 @@
+import { IconPartCubicBezierCurve } from '#components';
 import type { Peekable } from '@sapphire/iterator-utilities';
 import type { VectorPath } from '../VectorPath';
 import type { Coordinate } from '../shared/Coordinate';
@@ -40,7 +41,7 @@ export class CubicBézierCurve extends BasePath<'C' | 'c'> {
 	public readonly end: Coordinate;
 
 	public constructor(type: 'C' | 'c', siblings: VectorPath.PathEntry[], previousCoordinate: Coordinate, entries: CubicBézierCurve.Data[]) {
-		super(type, siblings, previousCoordinate);
+		super(IconPartCubicBezierCurve, type, siblings, previousCoordinate);
 		this.entries = [];
 
 		let lastEndCoordinate = this.start;

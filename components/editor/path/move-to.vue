@@ -1,5 +1,5 @@
 <template>
-	<editor-path-base title="Move To">
+	<editor-path-base title="Move To" :icon="el.icon">
 		<editor-path-move-to-entry v-for="(entry, index) of entries" :key="entry.id" :el="entry" :index="index" @update="$emit('update', el)" />
 	</editor-path-base>
 </template>

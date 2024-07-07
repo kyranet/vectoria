@@ -1,3 +1,4 @@
+import { IconPartVerticalLineTo } from '#components';
 import type { Peekable } from '@sapphire/iterator-utilities';
 import type { VectorPath } from '../VectorPath';
 import type { Coordinate } from '../shared/Coordinate';
@@ -27,7 +28,7 @@ export class VerticalLineTo extends BasePath<'V' | 'v'> {
 	public readonly entries: VerticalLineTo.Part[];
 
 	public constructor(type: 'V' | 'v', siblings: VectorPath.PathEntry[], previousCoordinate: Coordinate, entries: VerticalLineTo.Data[]) {
-		super(type, siblings, previousCoordinate);
+		super(IconPartVerticalLineTo, type, siblings, previousCoordinate);
 		this.entries = [];
 
 		let lastEndCoordinate = this.start;

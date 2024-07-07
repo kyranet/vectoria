@@ -18,7 +18,7 @@ export abstract class BaseVectorElement<Element extends SVGElement, TagName exte
 		this.element = options.element;
 		this.tagName = options.element.tagName as TagName;
 		this.title = options.title;
-		this.icon = options.icon ?? null;
+		this.icon = options.icon ? markRaw(options.icon) : null;
 		this.id = options.element.id || undefined;
 		this.inputs = markRaw((options.inputs || []).concat(SharedAttributes).map((component) => ({ id: (id++).toString(), component })));
 	}

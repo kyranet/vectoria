@@ -1,5 +1,5 @@
 <template>
-	<editor-path-base title="Arc Curve">
+	<editor-path-base title="Arc Curve" :icon="el.icon">
 		<editor-path-arc-curve-entry v-for="(entry, index) of entries" :key="entry.id" :el="entry" :index="index" @update="$emit('update', el)" />
 	</editor-path-base>
 </template>

@@ -1,4 +1,4 @@
-import { EditorAttributesFill, EditorAttributesFillOpacity, EditorAttributesFillRule, EditorAttributesPath } from '#components';
+import { EditorAttributesFill, EditorAttributesFillOpacity, EditorAttributesFillRule, EditorAttributesPath, IconElementPath } from '#components';
 import { peekable } from '@sapphire/iterator-utilities';
 import { BaseGeometryVectorElement } from './base/BaseGeometryVectorElement';
 import { ArcCurve } from './path/ArcCurve';
@@ -21,6 +21,7 @@ export class VectorPath extends BaseGeometryVectorElement<SVGPathElement, 'path'
 
 	public constructor(element: SVGPathElement) {
 		super({
+			icon: IconElementPath,
 			element,
 			title: 'Path',
 			inputs: [EditorAttributesPath, EditorAttributesFill, EditorAttributesFillOpacity, EditorAttributesFillRule]

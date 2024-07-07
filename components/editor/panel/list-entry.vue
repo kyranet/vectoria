@@ -1,8 +1,8 @@
 <template>
 	<div class="border-l border-base-content/10 pl-2">
-		<div class="flex cursor-pointer hover:bg-base-100" @click="selected = el">
+		<div class="flex cursor-pointer items-center rounded-md hover:bg-base-100" @click="selected = el">
 			<icon-caret v-if="children.length" :open="open" class="h-6 w-6" @click.stop="toggleOpen()" />
-			<component v-if="el.icon" :is="el.icon" />
+			<component v-if="el.icon" :is="el.icon" class="mr-1" />
 			<div class="grow font-bold">
 				<span>{{ el.title }}</span>
 				<span v-if="el.id" class="ml-2 font-mono text-xs text-base-content/50">{{ el.id }}</span>

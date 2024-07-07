@@ -1,3 +1,4 @@
+import { IconPartMoveTo } from '#components';
 import type { Peekable } from '@sapphire/iterator-utilities';
 import type { VectorPath } from '../VectorPath';
 import type { Coordinate } from '../shared/Coordinate';
@@ -26,7 +27,7 @@ export class MoveTo extends BasePath<'M' | 'm'> {
 	public readonly entries: MoveTo.Part[];
 
 	public constructor(type: 'M' | 'm', siblings: VectorPath.PathEntry[], previousCoordinate: Coordinate, entries: MoveTo.Data[]) {
-		super(type, siblings, previousCoordinate);
+		super(IconPartMoveTo, type, siblings, previousCoordinate);
 		this.entries = [];
 
 		let lastEndCoordinate = this.start;

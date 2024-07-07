@@ -1,5 +1,5 @@
 <template>
-	<editor-path-base title="Close Path">
+	<editor-path-base title="Close Path" :icon="el.icon">
 		<div class="input grid grid-cols-2 gap-2">
 			<label class="flex gap-2">
 				<span>X</span>

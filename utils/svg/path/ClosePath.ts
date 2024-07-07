@@ -1,3 +1,4 @@
+import { IconPartClosePath } from '#components';
 import type { VectorPath } from '../VectorPath';
 import type { Coordinate } from '../shared/Coordinate';
 import { BasePath } from './base/BasePath';
@@ -11,7 +12,7 @@ export class ClosePath extends BasePath<'Z' | 'z'> {
 	public readonly end: Coordinate;
 
 	public constructor(type: 'Z' | 'z', siblings: VectorPath.PathEntry[], previousCoordinate: Coordinate) {
-		super(type, siblings, previousCoordinate);
+		super(IconPartClosePath, type, siblings, previousCoordinate);
 		this.end = siblings.length > 0 ? siblings[0].start : { x: 0, y: 0 };
 	}
 

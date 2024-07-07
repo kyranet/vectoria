@@ -1,5 +1,5 @@
 <template>
-	<editor-path-base title="Cubic Bézier Curve">
+	<editor-path-base title="Cubic Bézier Curve" :icon="el.icon">
 		<editor-path-cubic-bezier-curve-entry
 			v-for="(entry, index) of entries"
 			:key="entry.id"

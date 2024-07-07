@@ -1,3 +1,4 @@
+import { IconPartArcCurve } from '#components';
 import type { Peekable } from '@sapphire/iterator-utilities';
 import type { VectorPath } from '../VectorPath';
 import type { Coordinate } from '../shared/Coordinate';
@@ -49,7 +50,7 @@ export class ArcCurve extends BasePath<'A' | 'a'> {
 	public readonly entries: ArcCurve.Part[];
 
 	public constructor(type: 'A' | 'a', siblings: VectorPath.PathEntry[], previousCoordinate: Coordinate, entries: ArcCurve.Data[]) {
-		super(type, siblings, previousCoordinate);
+		super(IconPartArcCurve, type, siblings, previousCoordinate);
 		this.entries = [];
 
 		let lastEndCoordinate = this.start;

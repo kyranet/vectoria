@@ -16,35 +16,35 @@
 					<!-- <editor-svg v-if="svgNode" :el="svgNode" /> -->
 				</div>
 			</div>
-			<ul v-if="svgNode" class="mt-4 flex flex-none flex-row justify-end gap-12 rounded-b-xl bg-base-300 p-4">
-				<li class="flex flex-col">
-					<span>
-						<Icon name="ph:arrow-line-left-duotone" class="mr-2 h-5 w-5 text-primary" />
-						<strong>X:</strong>
-						{{ svgSize.x }}px
-					</span>
-					<span>
-						<Icon name="ph:arrow-line-up-duotone" class="mr-2 h-5 w-5 text-primary" />
-						<strong>Y:</strong>
-						{{ svgSize.y }}px
-					</span>
+			<ul v-if="svgNode" class="mt-4 flex flex-none flex-row items-center justify-end gap-12 rounded-b-xl bg-base-300 p-4">
+				<li class="grow">
+					<button class="btn btn-sm" @click="exporter?.open()">
+						<Icon name="material-symbols:download" />
+						Export
+					</button>
 				</li>
-				<li class="flex flex-col">
+				<li class="flex gap-1">
+					<span> {{ svgSize.x }}px </span>
 					<span>
-						<Icon name="ph:arrows-horizontal-duotone" class="mr-2 h-5 w-5 text-primary" />
-						<strong>Width:</strong>
+						<Icon name="material-symbols:pen-size-4" class="h-5 w-5 rotate-90 text-primary" />
+					</span>
+					<span> {{ svgSize.y }}px </span>
+				</li>
+				<li class="flex gap-1">
+					<span>
 						{{ svgSize.width }}
 					</span>
 					<span>
-						<Icon name="ph:arrows-vertical-duotone" class="mr-2 h-5 w-5 text-primary" />
-						<strong>Height:</strong>
+						<Icon name="material-symbols:close-small-rounded" class="h-5 w-5 text-primary" />
+					</span>
+					<span>
 						{{ svgSize.height }}
 					</span>
 				</li>
-				<li class="flex max-w-96 flex-grow items-center gap-2">
-					<button class="btn btn-ghost" @click="scale = 1" :disabled="scale === 1">Reset</button>
-					<input v-model="scale" type="range" min="0.1" max="5" step="0.1" class="range" />
-					<label class="input input-ghost flex items-center">
+				<li class="mr-4 flex max-w-96 flex-grow items-center gap-2">
+					<button class="btn btn-ghost btn-sm" @click="scale = 1" :disabled="scale === 1">Reset</button>
+					<input v-model="scale" type="range" min="0.1" max="5" step="0.1" class="range range-sm" />
+					<label class="input input-sm input-ghost flex items-center">
 						<input v-model="scale100" type="number" min="0.1" max="500" class="max-w-16 grow" />
 						<span class="shrink-0">%</span>
 					</label>
@@ -60,14 +60,17 @@
 			</div>
 		</div>
 	</div>
+
+	<export-svg v-if="svgNode" ref="exporter" :node="svgNode" />
 </template>
 
 <script setup lang="ts">
+import { ExportSvg } from '#components';
 import { VectorRoot } from '~/utils/svg/VectorRoot';
 
 defineSeo({
 	title: 'Vectoria',
-	description: 'A complete SVG editor for all your needs',
+	description: 'A complete SVG editor for all your needs'
 });
 
 const input = ref('');
@@ -77,6 +80,7 @@ const parent = ref<HTMLDivElement | null>(null!);
 const svgNode = ref<SVGSVGElement | null>(null);
 const errorNode = ref<HTMLElement | null>(null);
 const editorNode = ref<VectorRoot | null>(null);
+const exporter = ref<InstanceType<typeof ExportSvg> | null>(null);
 
 const draggablePanel = ref<HTMLDivElement>(null!);
 const { x: draggablePanelX } = useDraggable(draggablePanel, { axis: 'x', initialValue: { x: 300, y: 0 } });
@@ -98,7 +102,7 @@ const scaledSize = computed(() => {
 });
 
 const dropping = ref(false);
-if (process.client) {
+if (import.meta.client) {
 	const parser = new DOMParser();
 	watch(input, (value) => {
 		const result = parser.parseFromString(value, 'image/svg+xml');

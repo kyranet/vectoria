@@ -1,3 +1,4 @@
+import { IconPartHorizontalLineTo } from '#components';
 import type { Peekable } from '@sapphire/iterator-utilities';
 import type { VectorPath } from '../VectorPath';
 import type { Coordinate } from '../shared/Coordinate';
@@ -27,7 +28,7 @@ export class HorizontalLineTo extends BasePath<'H' | 'h'> {
 	public readonly entries: HorizontalLineTo.Part[];
 
 	public constructor(type: 'H' | 'h', siblings: VectorPath.PathEntry[], previousCoordinate: Coordinate, entries: HorizontalLineTo.Data[]) {
-		super(type, siblings, previousCoordinate);
+		super(IconPartHorizontalLineTo, type, siblings, previousCoordinate);
 		this.entries = [];
 
 		let lastEndCoordinate = this.start;

@@ -1,3 +1,4 @@
+import { IconPartSmoothQuadraticBezierCurve } from '#components';
 import type { Peekable } from '@sapphire/iterator-utilities';
 import type { VectorPath } from '../VectorPath';
 import type { Coordinate } from '../shared/Coordinate';
@@ -39,7 +40,7 @@ export class SmoothQuadraticBézierCurve extends BasePath<'T' | 't'> {
 		previousCoordinate: Coordinate,
 		entries: SmoothQuadraticBézierCurve.Data[]
 	) {
-		super(type, siblings, previousCoordinate);
+		super(IconPartSmoothQuadraticBezierCurve, type, siblings, previousCoordinate);
 		this.entries = [];
 
 		let lastEndCoordinate = this.start;

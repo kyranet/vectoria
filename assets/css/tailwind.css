@@ -3,11 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-	.icon {
-		@apply inline-block;
-		vertical-align: text-bottom !important;
-	}
-
 	.input {
 		@apply min-w-0 placeholder:text-base-content/60 disabled:text-base-content/60;
 	}
@@ -18,5 +13,9 @@
 
 	.text-base-content-readonly {
 		color: oklch(from oklch(var(--bc)) calc(l * 0.8) c h);
+	}
+
+	.iconify {
+		@apply align-text-bottom;
 	}
 }

@@ -1,18 +1,21 @@
 <template>
-	<template v-if="element">
+	<template v-if="el">
 		<div class="panel-selected-element" :style="{ top: `${draggablePanelY}px` }">
 			<div ref="draggablePanel" class="cursor-ns-resize border-2 border-base-300 hover:border-primary"></div>
 			<section class="p-4">
-				<span class="text-xl font-bold">{{ element.title }}</span>
+				<span class="flex items-center text-xl font-bold">
+					<component v-if="el.icon" :is="el.icon" />
+					{{ el.title }}
+				</span>
 
-				<component v-for="input of element.inputs" :key="input.id" :is="input.component" :el="element.element" />
+				<component v-for="input of el.inputs" :key="input.id" :is="input.component" :el="el.element" />
 			</section>
 		</div>
 	</template>
 </template>
 
 <script setup lang="ts">
-const element = inject(InjectedSelectedElement)!;
+const el = inject(InjectedSelectedElement)!;
 
 const draggablePanel = ref<HTMLDivElement>(null!);
 const windowSize = useWindowSize();

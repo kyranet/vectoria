@@ -1,9 +1,10 @@
+import { IconPartLineTo } from '#components';
 import type { Peekable } from '@sapphire/iterator-utilities';
 import type { VectorPath } from '../VectorPath';
 import type { Coordinate } from '../shared/Coordinate';
 import { BasePath } from './base/BasePath';
-import { LineToPart } from './parts/LineToPart';
 import { readNumber } from './parser/readNumber';
+import { LineToPart } from './parts/LineToPart';
 
 /**
  * Draw a line from the current point to the end point specified by `x`,`y`. Any
@@ -26,7 +27,7 @@ export class LineTo extends BasePath<'L' | 'l'> {
 	public readonly entries: LineTo.Part[];
 
 	public constructor(type: 'L' | 'l', siblings: VectorPath.PathEntry[], previousCoordinate: Coordinate, entries: LineTo.Data[]) {
-		super(type, siblings, previousCoordinate);
+		super(IconPartLineTo, type, siblings, previousCoordinate);
 		this.entries = [];
 
 		let lastEndCoordinate = this.start;
