@@ -1,12 +1,10 @@
 <template>
 	<label class="form-control">
-		<div class="label">
-			<span class="label-text">
-				Baseline Shift
-				<editor-attributes-common-info url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/baseline-shift" />
-				<editor-attributes-common-animation animatable="yes" />
-			</span>
-		</div>
+		<editor-attributes-common-header
+			name="Baseline Shift"
+			url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/baseline-shift"
+			animatable="yes"
+		/>
 		<select v-model="value" class="select select-bordered">
 			<option value="sub">Sub</option>
 			<option value="super">Super</option>

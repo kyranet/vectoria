@@ -2,17 +2,17 @@
 	<div class="rounded-lg bg-base-200 p-1">
 		<div class="join w-full justify-end">
 			<button class="btn join-item btn-xs text-primary disabled:btn-ghost disabled:text-base-content/60" :disabled="upDisabled" @click="moveUp">
-				<Icon name="material-symbols:keyboard-arrow-up-rounded" />
+				<icon-keyboard-arrow-up />
 			</button>
 			<button
 				class="btn join-item btn-xs text-primary disabled:btn-ghost disabled:text-base-content/60"
 				:disabled="downDisabled"
 				@click="moveDown"
 			>
-				<Icon name="material-symbols:keyboard-arrow-down-rounded" />
+				<icon-keyboard-arrow-down />
 			</button>
 			<button class="btn join-item btn-xs" @click="remove">
-				<Icon name="material-symbols:delete-forever-rounded" class="text-error" />
+				<icon-delete class="text-error" />
 			</button>
 		</div>
 		<slot></slot>

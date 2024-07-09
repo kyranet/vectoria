@@ -1,12 +1,10 @@
 <template>
 	<label class="form-control">
-		<div class="label">
-			<span class="label-text">
-				Accumulative
-				<editor-attributes-common-info url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/accumulate" />
-				<editor-attributes-common-animation animatable="no" />
-			</span>
-		</div>
+		<editor-attributes-common-header
+			name="Accumulative"
+			url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/accumulate"
+			animatable="no"
+		/>
 		<select v-model="value" class="select select-bordered">
 			<option value="accumulative">None</option>
 			<option value="none">None</option>

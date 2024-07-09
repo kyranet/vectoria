@@ -1,10 +1,6 @@
 <template>
 	<div class="label">
-		<span class="label-text">
-			Data
-			<editor-attributes-common-info url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d" />
-			<editor-attributes-common-animation animatable="yes" />
-		</span>
+		<editor-attributes-common-header name="Data" url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d" animatable="yes" />
 	</div>
 	<div class="ml-1 rounded-bl-lg border-l-2 border-base-100">
 		<div class="ml-1 grid gap-4 rounded-lg bg-base-300 p-2">

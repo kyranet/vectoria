@@ -1,12 +1,6 @@
 <template>
 	<label class="form-control">
-		<div class="label">
-			<span class="label-text">
-				Color
-				<editor-attributes-common-info url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/color" />
-				<editor-attributes-common-animation animatable="yes" />
-			</span>
-		</div>
+		<editor-attributes-common-header name="Color" url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/color" animatable="yes" />
 		<editor-attributes-input-color v-model="value" />
 	</label>
 </template>

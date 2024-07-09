@@ -1,5 +1,5 @@
 <template>
-	<icon-base>
+	<icon-base-legacy>
 		<g class="element-part-stroke">
 			<path d="M 56,128 H 200" class="element-part-main-line" />
 		</g>
@@ -7,5 +7,5 @@
 			<circle cx="56" cy="128" r="10" class="element-part-start" />
 			<circle cx="200" cy="128" r="10" />
 		</g>
-	</icon-base>
+	</icon-base-legacy>
 </template>

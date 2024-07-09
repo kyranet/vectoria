@@ -19,27 +19,23 @@
 			<ul v-if="svgNode" class="mt-4 flex flex-none flex-row items-center justify-end gap-12 rounded-b-xl bg-base-300 p-4">
 				<li class="grow">
 					<button class="btn btn-sm" @click="exporter?.open()">
-						<Icon name="material-symbols:download" />
+						<icon-download class="h-5 w-5" />
 						Export
 					</button>
 				</li>
-				<li class="flex gap-1">
-					<span> {{ svgSize.x }}px </span>
+				<li class="flex items-center gap-1">
+					<span>{{ svgSize.x }}px</span>
 					<span>
-						<Icon name="material-symbols:pen-size-4" class="h-5 w-5 rotate-90 text-primary" />
+						<icon-divisor class="h-5 w-5 rotate-90 text-primary" />
 					</span>
-					<span> {{ svgSize.y }}px </span>
+					<span>{{ svgSize.y }}px</span>
 				</li>
-				<li class="flex gap-1">
+				<li class="flex items-center gap-1">
+					<span>{{ svgSize.width }}</span>
 					<span>
-						{{ svgSize.width }}
+						<icon-close class="h-5 w-5 text-primary" />
 					</span>
-					<span>
-						<Icon name="material-symbols:close-small-rounded" class="h-5 w-5 text-primary" />
-					</span>
-					<span>
-						{{ svgSize.height }}
-					</span>
+					<span>{{ svgSize.height }}</span>
 				</li>
 				<li class="mr-4 flex max-w-96 flex-grow items-center gap-2">
 					<button class="btn btn-ghost btn-sm" @click="scale = 1" :disabled="scale === 1">Reset</button>

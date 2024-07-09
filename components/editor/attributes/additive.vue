@@ -1,12 +1,6 @@
 <template>
 	<label class="form-control">
-		<div class="label">
-			<span class="label-text">
-				Additive
-				<editor-attributes-common-info url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/additive" />
-				<editor-attributes-common-animation animatable="no" />
-			</span>
-		</div>
+		<editor-attributes-common-header name="Additive" url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/additive" animatable="no" />
 		<select v-model="value" class="select select-bordered">
 			<option value="replace">Replace</option>
 			<option value="sum">Sum</option>

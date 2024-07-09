@@ -1,12 +1,6 @@
 <template>
 	<label class="form-control">
-		<div class="label">
-			<span class="label-text">
-				Height
-				<editor-attributes-common-info url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/height" />
-				<editor-attributes-common-animation animatable="yes" />
-			</span>
-		</div>
+		<editor-attributes-common-header name="Height" url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/height" animatable="yes" />
 		<input v-model="value" type="text" placeholder="unset" class="input" />
 	</label>
 </template>

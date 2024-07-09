@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	devtools: { enabled: true },
-	modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt', '@nuxtjs/sitemap', '@nuxt/icon', '@nuxt/image'],
+	modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt', '@nuxtjs/sitemap', '@nuxt/image'],
 	image: { screens: {} },
 	nitro: { prerender: { routes: ['/'] } },
 	tailwindcss: { viewer: false },

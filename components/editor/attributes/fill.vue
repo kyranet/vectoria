@@ -1,12 +1,10 @@
 <template>
 	<label class="form-control">
-		<div class="label">
-			<span class="label-text">
-				Fill Color
-				<editor-attributes-common-info url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill" />
-				<editor-attributes-common-animation :animatable="animation ? 'no' : 'yes'" />
-			</span>
-		</div>
+		<editor-attributes-common-header
+			name="Fill Color"
+			url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill"
+			:animatable="animation ? 'no' : 'yes'"
+		/>
 		<select v-if="animation" v-model="value" class="select select-bordered">
 			<option value="freeze">freeze</option>
 			<option value="remove">remove</option>

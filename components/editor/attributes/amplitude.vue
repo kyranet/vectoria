@@ -1,12 +1,10 @@
 <template>
 	<label class="form-control">
-		<div class="label">
-			<span class="label-text">
-				Amplitude
-				<editor-attributes-common-info url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/amplitude" />
-				<editor-attributes-common-animation animatable="yes" />
-			</span>
-		</div>
+		<editor-attributes-common-header
+			name="Amplitude"
+			url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/amplitude"
+			animatable="yes"
+		/>
 		<input v-model="value" type="number" min="0" class="input input-bordered" />
 	</label>
 </template>

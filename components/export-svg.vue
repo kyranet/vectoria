@@ -5,8 +5,8 @@
 		@click="cancel"
 	>
 		<form role="dialog" class="w-full max-w-lg rounded-xl bg-base-200 p-4 drop-shadow-md" @click.stop="noop" @submit.prevent="download">
-			<h2 class="text-2xl font-bold">
-				<Icon name="material-symbols:download" />
+			<h2 class="flex items-center gap-2 text-2xl font-bold">
+				<icon-download />
 				Export
 			</h2>
 
@@ -28,22 +28,22 @@
 				</div>
 				<div class="flex flex-row gap-2">
 					<label class="input input-bordered flex items-center gap-2">
-						<Icon name="material-symbols:width-rounded" class="h-5 w-5 shrink-0" />
+						<icon-width class="h-5 w-5 shrink-0" />
 						<input v-model="smartWidth" type="number" class="grow" min="0" />
 					</label>
 
 					<label class="input input-bordered flex items-center gap-2">
-						<Icon name="material-symbols:height-rounded" class="h-5 w-5 shrink-0" />
+						<icon-height class="h-5 w-5 shrink-0" />
 						<input v-model="smartHeight" type="number" class="grow" min="0" />
 					</label>
 
 					<button class="btn btn-neutral px-2" @click.prevent="toggleLock">
-						<Icon v-if="locked" name="material-symbols:link-rounded" class="h-8 w-8 text-primary" />
-						<Icon v-else name="material-symbols:link-off-rounded" class="h-8 w-8" />
+						<icon-link v-if="locked" class="h-8 w-8 text-primary" />
+						<icon-link-off v-else class="h-8 w-8" />
 					</button>
 
 					<button class="btn btn-neutral px-2" @click.prevent="undo">
-						<Icon name="material-symbols:undo-rounded" class="h-8 w-8" />
+						<icon-undo class="h-8 w-8" />
 					</button>
 				</div>
 			</div>

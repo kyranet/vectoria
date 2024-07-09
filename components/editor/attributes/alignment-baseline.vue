@@ -1,12 +1,10 @@
 <template>
 	<label class="form-control">
-		<div class="label">
-			<span class="label-text">
-				Alignment Baseline
-				<editor-attributes-common-info url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/alignment-baseline" />
-				<editor-attributes-common-animation animatable="yes" />
-			</span>
-		</div>
+		<editor-attributes-common-header
+			name="Alignment Baseline"
+			url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/alignment-baseline"
+			animatable="yes"
+		/>
 		<select v-model="value" class="select select-bordered">
 			<option value="auto">Auto</option>
 			<option value="baseline">Baseline</option>

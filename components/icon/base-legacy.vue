@@ -1,5 +1,5 @@
 <template>
-	<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em">
+	<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" class="icon">
 		<slot></slot>
 	</svg>
 </template>

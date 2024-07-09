@@ -10,21 +10,21 @@
 			<div role="tablist" class="tabs-boxed tabs mb-8">
 				<label role="tab" class="tab">
 					<span class="flex items-center gap-1">
-						<Icon name="material-symbols:check-box-outline-blank" class="h-5 w-5" />
+						<icon-blank class="h-5 w-5" />
 						Empty
 					</span>
 					<input v-model="tab" type="radio" :value="0" name="import-type" class="hidden" />
 				</label>
 				<label role="tab" class="tab">
 					<span class="flex items-center gap-1">
-						<Icon name="material-symbols:upload-rounded" class="h-5 w-5" />
+						<icon-upload class="h-5 w-5" />
 						Import
 					</span>
 					<input v-model="tab" type="radio" :value="1" name="import-type" class="hidden" />
 				</label>
 				<label role="tab" class="tab">
 					<span class="flex items-center gap-1">
-						<Icon name="material-symbols:content-paste" class="h-5 w-5" />
+						<icon-content-paste class="h-5 w-5" />
 						Paste
 					</span>
 					<input v-model="tab" type="radio" :value="2" name="import-type" class="hidden" />

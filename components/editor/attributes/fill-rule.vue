@@ -1,12 +1,10 @@
 <template>
 	<label class="form-control">
-		<div class="label">
-			<span class="label-text">
-				Fill Rule
-				<editor-attributes-common-info url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-rule" />
-				<editor-attributes-common-animation animatable="discrete" />
-			</span>
-		</div>
+		<editor-attributes-common-header
+			name="Fill Rule"
+			url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-rule"
+			animatable="discrete"
+		/>
 		<select v-model="value" class="select select-bordered">
 			<option value="nonzero">nonzero</option>
 			<option value="evenodd">evenodd</option>

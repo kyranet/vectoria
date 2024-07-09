@@ -1,12 +1,10 @@
 <template>
 	<label class="form-control">
-		<div class="label">
-			<span class="label-text">
-				Fill Opacity
-				<editor-attributes-common-info url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-opacity" />
-				<editor-attributes-common-animation animatable="yes" />
-			</span>
-		</div>
+		<editor-attributes-common-header
+			name="Fill Opacity"
+			url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-opacity"
+			animatable="yes"
+		/>
 		<editor-attributes-input-percentage v-model="value" />
 	</label>
 </template>

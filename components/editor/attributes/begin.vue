@@ -1,12 +1,6 @@
 <template>
 	<label class="form-control">
-		<div class="label">
-			<span class="label-text">
-				Begin
-				<editor-attributes-common-info url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/begin" />
-				<editor-attributes-common-animation animatable="no" />
-			</span>
-		</div>
+		<editor-attributes-common-header name="Begin" url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/begin" animatable="no" />
 		<input v-model="value" type="text" placeholder="unset" class="input input-bordered" />
 	</label>
 </template>

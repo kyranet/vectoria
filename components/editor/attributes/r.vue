@@ -1,12 +1,6 @@
 <template>
 	<label class="form-control">
-		<div class="label">
-			<span class="label-text">
-				Height
-				<editor-attributes-common-info url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/height" />
-				<editor-attributes-common-animation animatable="yes" />
-			</span>
-		</div>
+		<editor-attributes-common-header name="Radius" url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/r" animatable="yes" />
 		<editor-attributes-input-percentage v-model="value" />
 	</label>
 </template>

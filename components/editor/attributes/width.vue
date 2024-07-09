@@ -1,12 +1,6 @@
 <template>
 	<label class="form-control">
-		<div class="label">
-			<span class="label-text">
-				Width
-				<editor-attributes-common-info url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/width" />
-				<editor-attributes-common-animation animatable="yes" />
-			</span>
-		</div>
+		<editor-attributes-common-header name="Width" url="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/width" animatable="yes" />
 		<input v-model="value" type="text" placeholder="unset" class="input" />
 	</label>
 </template>
